@@ -78,6 +78,11 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "authenticated? should return false for a user with nil digest" do
+    # P
+      # - An issue 
+        # 	- When the User opens MULTIPLE BROWSERS opening this SAME site 
+		      # & If the user logs out of the first browser
+	      	# & Both logged in and remembered in the second one
     assert_not @user.authenticated?('')
   end
   
