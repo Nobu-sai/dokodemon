@@ -2,9 +2,9 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
  
-   def setup
+  def setup
     @user = User.new(name: "Example User", email: "user@example.com",
-    password: "foobar", password_confirmation: "foobar")
+                     password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -83,7 +83,7 @@ class UserTest < ActiveSupport::TestCase
         # 	- When the User opens MULTIPLE BROWSERS opening this SAME site 
 		      # & If the user logs out of the first browser
 	      	# & Both logged in and remembered in the second one
-    assert_not @user.authenticated?('')
+      assert_not @user.authenticated?(:remember, '')
   end
   
 end

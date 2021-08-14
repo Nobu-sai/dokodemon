@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  # before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: :destroy
 
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
   
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
   end
 
 
@@ -23,10 +24,9 @@ class UsersController < ApplicationController
       #   P
       #   : evernote:///view/180370944/s350/f853988c-9e8b-4f0a-63e3-4702861b2711/77812575-71c1-4561-9362-9c31a7a32180
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -58,8 +58,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, 
-                                   )
+                                   :password_confirmation)
     end
     
     
@@ -84,5 +83,6 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+    
 end
 
