@@ -39,6 +39,7 @@ Rails.application.configure do
   # host = '26f8bb6feae742df8cd23f60aeae85eb.vfs.cloud9.us-east-2.amazonaws.com' 
     # Use this on the cloud IDE.
   host = 'localhost:3000'  
+  # host = 'http://127.0.0.1:3000'
     # Use this on own Computer Local Server.
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
     # Use this if developing on localhost.
