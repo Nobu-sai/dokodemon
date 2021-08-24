@@ -20,7 +20,8 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-# production:
+production:
+  url: <%= ENV['DATABASE_URL'] %>
 #   adapter: postgresql
 #   encoding: unicode
 #   # For details on connection pooling, see Rails configuration guide
