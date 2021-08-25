@@ -26,8 +26,12 @@ production:
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # database: sample_app_production
+  # username: sample_app
+  # password: <%= ENV['SAMPLE_APP_DATABASE_PASSWORD'] %>
+
   # url: <%= ENV['DATABASE_URL'] %>
-  url: postgres://dgrshwgexztadn:e7ac0108ec82e7dd2b046eae8e156335a44b4c9bf337783c21348d0fa848b989@ec2-54-159-35-35.compute-1.amazonaws.com:5432/dc19thacbh7pg5
+  # url: postgres://dgrshwgexztadn:e7ac0108ec82e7dd2b046eae8e156335a44b4c9bf337783c21348d0fa848b989@ec2-54-159-35-35.compute-1.amazonaws.com:5432/dc19thacbh7pg5
   # database: dc19thacbh7pg5
   # username: dgrshwgexztadn
   # password: e7ac0108ec82e7dd2b046eae8e156335a44b4c9bf337783c21348d0fa848b989
