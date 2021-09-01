@@ -17,3 +17,4 @@ class Micropost < ApplicationRecord
   end
   
 end
+

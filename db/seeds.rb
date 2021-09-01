@@ -33,3 +33,19 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# Places
+Place.create!(name:  "Example Place")
+
+99.times do |n|
+  name  = Faker::Name.name
+  Place.create!(name:  name)
+end
+
+
+# PlaceComments
+place = Place.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  places.each { |user| place.place_comments.create!(content: content) }
+end

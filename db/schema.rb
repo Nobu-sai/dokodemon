@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_115516) do
+ActiveRecord::Schema.define(version: 2021_08_31_140017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,23 @@ ActiveRecord::Schema.define(version: 2021_08_18_115516) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
+  create_table "place_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "place_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["place_id"], name: "index_place_comments_on_place_id"
+    t.index ["user_id", "place_id", "created_at"], name: "index_place_comments_on_user_id_and_place_id_and_created_at"
+    t.index ["user_id"], name: "index_place_comments_on_user_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -81,4 +98,6 @@ ActiveRecord::Schema.define(version: 2021_08_18_115516) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "microposts", "users"
+  add_foreign_key "place_comments", "places"
+  add_foreign_key "place_comments", "users"
 end
