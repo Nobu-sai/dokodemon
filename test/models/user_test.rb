@@ -77,7 +77,7 @@ class UserTest < ActiveSupport::TestCase
     
   end
   
-  test "authenticated? should return false for a user with nil digest" do
+  test "Send a nil remember digest => User Model/authenticated? Method should return false" do
     # P
       # - An issue 
         # 	- When the User opens MULTIPLE BROWSERS opening this SAME site 
@@ -86,7 +86,7 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.authenticated?(:remember, '')
   end
   
-  test "associated microposts should be destroyed" do
+  test "A user is destroyed => The associated blogs should be destroyed" do
     @user.save
     @user.microposts.create!(content: "Lorem ipsum")
     assert_difference 'Micropost.count', -1 do
@@ -94,7 +94,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
-  test "should follow and unfollow a user" do
+  test "Following => Users should follow and unfollow with each other" do
     michael  = users(:michael)
     archer   = users(:archer)
     assert_not michael.following?(archer)
@@ -105,26 +105,29 @@ class UserTest < ActiveSupport::TestCase
     assert_not michael.following?(archer)
   end
   
-  test "feed should have the right posts" do
+  test "Blog post feed => Should have the right posts" do
     michael = users(:michael)
     archer  = users(:archer)
     lana    = users(:lana)
-    # Posts from followed user
-    lana.microposts.each do |post_following|
-      assert michael.feed.include?(post_following)
-    end
-    # Self-posts for user with followers
-    michael.microposts.each do |post_self|
-      assert michael.feed.include?(post_self)
-    end
-    # Self-posts for user with no followers
-    archer.microposts.each do |post_self|
-      assert archer.feed.include?(post_self)
-    end
-    # Posts from unfollowed user
-    archer.microposts.each do |post_unfollowed|
-      assert_not michael.feed.include?(post_unfollowed)
-    end
+
+    # Posts from followed user => Should BE included. 
+      lana.blogs.each do |post_following|
+        assert michael.feed.include?(post_following)
+      end
+
+    # Self-posts for user WITH followers => Should BE included. 
+      michael.blogs.each do |post_self|
+        assert michael.feed.include?(post_self)
+      end
+      
+    # Self-posts for user WITHOUT followers => Should BE included.
+      archer.blogs.each do |post_self|
+        assert archer.feed.include?(post_self)
+      end
+    # Posts from unfollowed user => Should NOT be included.
+      archer.blogs.each do |post_unfollowed|
+        assert_not michael.feed.include?(post_unfollowed)
+      end
   end
   
 end

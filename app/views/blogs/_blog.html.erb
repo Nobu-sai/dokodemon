@@ -1,0 +1,19 @@
+<li id="blog-<%= blog.id %>">
+  <%= link_to gravatar_for(blog.user, size: 50), blog.user %>
+  <span class="user">
+    <%= link_to blog.user.name, blog.user %>
+  </span>
+  <span class="content">
+    <%= blog.content %>
+    <%= image_tag blog.display_image if blog.image.attached? %>
+    
+  </span>
+  
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(blog.created_at) %> ago.
+    <% if current_user?(blog.user) %>
+      <%= link_to "Delete", blog, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>
