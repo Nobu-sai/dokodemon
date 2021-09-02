@@ -36,8 +36,8 @@ class BlogsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination'    
 
     # Delete post.
-      assert_select 'a', text: 'delete'
-      first_micropost = @user.blogs.paginate(page: 1).first
+      assert_select 'a', text: 'Delete'
+      first_blog = @user.blogs.paginate(page: 1).first
       assert_difference 'Blog.count', -1 do
         delete blog_path(first_blog)
       end
@@ -46,18 +46,18 @@ class BlogsInterfaceTest < ActionDispatch::IntegrationTest
       assert_select 'a', { text: 'delete', count: 0 }
   end  
   
-  test "In the Home Page, Blog sidebar count" do
+  test "In the Home Page, Blog sidebar (/shared/_user_info.html.erb) Blog Post Post count" do
     log_in_as(@user)
     get root_path
-    assert_match "#{@user.blogs.count} blogs", response.body
+    assert_match "#{@user.blogs.count} Blog Posts", response.body
     # A user with zero blogs visits ones's Home Page => Blog count should be ZERO.
       other_user = users(:malory)
       log_in_as(other_user)
       get root_path
-      assert_match "0 blogs", response.body
+      assert_match "0 Blog Posts", response.body
     # A user with zero blogs post a new blog => Blog count should INCREASE.
       other_user.blogs.create!(content: "A blog")
       get root_path
-      assert_match "1 blog", response.body
+      assert_match "1 Blog Post", response.body
   end
 end

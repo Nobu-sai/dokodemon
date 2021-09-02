@@ -9,7 +9,7 @@ class BlogsController < ApplicationController
   end
   
   def create
-    @blog = current_user.microposts.build(blog_params)
+    @blog = current_user.blogs.build(blog_params)
     @blog.image.attach(params[:blog][:image])
     if @blog.save
       flash[:success] = "The new blog post was created!"
@@ -23,7 +23,7 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     flash[:success] = "The blog post was deleted!"
-    if request.referrer.nil? || request.referrer == microposts_url
+    if request.referrer.nil? || request.referrer == blogs_url
       redirect_to root_url
     else
       redirect_back(fallback_location: root_url)
