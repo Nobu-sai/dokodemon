@@ -8,9 +8,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
 
   # show Action
   test "Click one of Blog Post to access to the Blog Page => Should Route to the Blog Page." do 
-    # get blog_path(@blog.id)
-    # get blog_path(1)
-    get blog_path($1)
+    get blog_path(@blog.id)
     assert_response :success
   end
 
