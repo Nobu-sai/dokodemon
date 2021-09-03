@@ -1,0 +1,10 @@
+<% provide(:title, 'All Blog Posts') %>
+<h1>All Blog Posts</h1>
+
+<%= will_paginate %>
+
+<ul class="blogs">
+  <%= render @blogs %>
+</ul>
+
+<%= will_paginate %>

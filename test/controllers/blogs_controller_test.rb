@@ -6,26 +6,36 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
     @blog = blogs(:orange)
   end
 
-  test "should redirect create when not logged in" do
-    assert_no_difference 'Blog.count' do
-      post blogs_path, params: { blog: { content: "Lorem ipsum" } }
-    end
-    assert_redirected_to login_url
+  # show Action
+  test "Click one of Blog Post to access to the Blog Page => Should Route to the Blog Page." do 
+    # get blog_path(@blog.id)
+    # get blog_path(1)
+    get blog_path($1)
+    assert_response :success
   end
 
-  test "should redirect destroy when not logged in" do
-    assert_no_difference 'Blog.count' do
-      delete blog_path(@blog)
+
+  # create Aciton
+    test "should redirect create when not logged in" do
+      assert_no_difference 'Blog.count' do
+        post blogs_path, params: { blog: { content: "Lorem ipsum" } }
+      end
+      assert_redirected_to login_url
     end
-    assert_redirected_to login_url
-  end
-    
-  test "should redirect destroy for wrong micropost" do
-    log_in_as(users(:michael))
-    blog = blogs(:ants)
-    assert_no_difference 'Blog.count' do
-      delete blog_path(blog)
+
+    test "should redirect destroy when not logged in" do
+      assert_no_difference 'Blog.count' do
+        delete blog_path(@blog)
+      end
+      assert_redirected_to login_url
     end
-    assert_redirected_to root_url
-  end
+      
+    test "should redirect destroy for wrong blog" do
+      log_in_as(users(:michael))
+      blog = blogs(:ants)
+      assert_no_difference 'Blog.count' do
+        delete blog_path(blog)
+      end
+      assert_redirected_to root_url
+    end
 end

@@ -2,10 +2,15 @@ class BlogsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
+  def index
+    @blogs = Blog.where(activated: true).paginate(page: params[:page])   
+  end
+
   def show
-    @user = User.find(params[:id])
-    @blogs = @user.blogs.paginate(page: params[:page])
-    redirect_to root_url and return unless @user.activated?
+    # @user = User.find(params[:id])
+    # @blogs = @user.blogs.paginate(page: params[:page])
+    @blog = Blog.find(params[:id])
+    # redirect_to root_url and return unless @user.activated?
   end
   
   def create
@@ -29,6 +34,11 @@ class BlogsController < ApplicationController
       redirect_back(fallback_location: root_url)
       
     end
+  end
+
+  def  blog_post
+    @blog = Blog.find(params[:id])
+    redirect_to root_url and return unless @blog
   end
 
   private
