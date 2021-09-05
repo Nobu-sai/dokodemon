@@ -1,4 +1,13 @@
-<h1>Showing Selected Blog Posts</h1>
-<p>
- Content: <%= @blog.content %>
-</p>
+<% provide(:title, "TITLE - #{@blog.user.name}") %>
+
+<div>
+
+	<h1>Showing Selected Blog Posts</h1>
+	<div>       
+		<%= render 'shared/user_info' %>
+	</div>
+	<div>
+		<p>Content: <%= @blog.content %></p>
+	</div>
+
+</div>

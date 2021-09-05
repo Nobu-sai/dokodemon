@@ -7,9 +7,12 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # show Action
-  test "Click one of Blog Post to access to the Blog Page => Should Route to the Blog Page." do 
+  test "GET Request => Should Route to the Blog Page." do 
     get blog_path(@blog.id)
-    assert_response :success
+   
+    # get '/:username/blog/:title' => 'blogs#show', as: 'blog_post'
+      get blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :blog_post_id => blog.id)
+      assert_response :success
   end
 
 

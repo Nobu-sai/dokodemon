@@ -7,10 +7,8 @@ class BlogsController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @blogs = @user.blogs.paginate(page: params[:page])
-    @blog = Blog.find(params[:id])
-    # redirect_to root_url and return unless @user.activated?
+    @blog = Blog.find(params[:blog_post_id])
+    @user = User.find(@blog.user.id)
   end
   
   def create
@@ -34,11 +32,6 @@ class BlogsController < ApplicationController
       redirect_back(fallback_location: root_url)
       
     end
-  end
-
-  def  blog_post
-    @blog = Blog.find(params[:id])
-    redirect_to root_url and return unless @blog
   end
 
   private
