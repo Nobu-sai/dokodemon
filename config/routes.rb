@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/:username/blog/:title' => 'blogs#show', as: 'blog_post'
   # Request
-    # <%= link_to "BLOG-TITLE", blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :blog_post_id => blog.id) %>
+    # <%= link_to "BLOG-TITLE", blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :id => blog.id) %>
     # - blog.id is required to FIND the Blog Post in BlogsController/show Action.
   
   resources :users do
@@ -29,9 +29,11 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :blogs,          only: [:show, :create, :destroy ]    
+  # resources :blogs,          only: [:create, :destroy ]    
+  resources :blogs
   resources :relationships,       only: [:create, :destroy]
   
 
 
 end
+

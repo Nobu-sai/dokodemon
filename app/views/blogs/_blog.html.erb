@@ -4,7 +4,7 @@
     <%= link_to blog.user.name, blog.user %>
   </span>
   <span class="content">    
-    <%= link_to "BLOG-TITLE", blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :blog_post_id => blog.id) %>
+    <%= link_to "BLOG-TITLE", blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_').gsub(/\./, '_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :id => blog.id) %>
     <%= blog.content %>
     <%= image_tag blog.display_image if blog.image.attached? %>
     

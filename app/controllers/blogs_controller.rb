@@ -2,12 +2,12 @@ class BlogsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
-  def index
-    @blogs = Blog.where(activated: true).paginate(page: params[:page])   
+  def index    
+    @blogs = Blog.all.paginate(page: params[:page])   
   end
 
   def show
-    @blog = Blog.find(params[:blog_post_id])
+    @blog = Blog.find(params[:id])
     @user = User.find(@blog.user.id)
   end
   
