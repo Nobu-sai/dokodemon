@@ -1,10 +1,10 @@
 <li id="blog-<%= blog.id %>">
-  <%= link_to gravatar_for(blog.user, size: 50), blog.user %>
+  <%= link_to user_gravatar(blog.user, size: 50), blog.user %>
   <span class="user">
     <%= link_to blog.user.name, blog.user %>
   </span>
   <span class="content">    
-    <%= link_to "BLOG-TITLE", blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_').gsub(/\./, '_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :id => blog.id) %>
+    <%= link_to "BLOG-TITLE", blog_post_path(:username => url_encoding(blog.user.name), :title => url_encoding("BLOG-TITLE"), :id => blog.id) %>
     <%= blog.content %>
     <%= image_tag blog.display_image if blog.image.attached? %>
     

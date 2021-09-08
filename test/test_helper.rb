@@ -3,6 +3,8 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/reporters"
 Minitest::Reporters.use!
+include ApplicationHelper
+
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -21,7 +23,6 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
   
-  include ApplicationHelper
 end
 
 class ActionDispatch::IntegrationTest

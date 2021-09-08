@@ -28,14 +28,19 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
 
     test "Request to the show Action with CUSTOM URL => Should Route to the Blog Page." do   
       # Request with specific URL 
-        # get '/:username/blog/:title' => 'blogs#show', as: 'blog_post'
-        # get blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :blog_post_id => blog.id)
-        encodingName = "Mr. Difficult Name" 
-        assert_routing "/#{CGI.escape(encodingName).gsub('+','_').gsub(/\./, '_')}/blog/#{CGI.escape("BLOG-TITLE").gsub('+','_')}", 
+        # Assets
+          # get '/:username/blog/:title' => 'blogs#show', as: 'blog_post'
+          # get blog_post_path(:username => CGI.escape(blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :blog_post_id => blog.id)
+        # How
+          # The encoding is done in url_encoding_helper_test.rb
+
+        user_name = "user_name"
+        blog_title = "blog_title"
+        assert_routing "/#{user_name}/blog/#{blog_title}", 
           controller: 'blogs', 
           action: 'show', 
-          username: CGI.escape("#{encodingName}").gsub('+','_').gsub(/\./, '_'),
-          title: CGI.escape("BLOG-TITLE").gsub('+','_') 
+          username: "#{user_name}",
+          title: "#{blog_title}"
     end
 
 

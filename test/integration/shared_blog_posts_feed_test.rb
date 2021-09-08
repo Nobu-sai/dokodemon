@@ -38,7 +38,7 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
   # UX
     test "Click the Link to ROUTE to a Blog Post Page => Should Route to the Blog Page" do
       log_in_as(@user)     
-      get blog_post_path(:username => CGI.escape(@blog.user.name).gsub('+','_'), :title => CGI.escape("BLOG-TITLE").gsub('+','_'), :id => @blog.id)
+      get blog_post_path(:username => url_encoding(@blog.user.name), :title => url_encoding("BLOG-TITLE"), :id => @blog.id)
       assert_template 'blogs/show'        
     end
 
