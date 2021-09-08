@@ -23,10 +23,13 @@ class BlogShowTest < ActionDispatch::IntegrationTest
     
     get blog_post_path(:username => "#{user_name}", :title => "#{blog_title}", :id => @blog.id)
     assert_template 'blogs/show'
-    assert_select 'title', "TITLE - #{@blog.user.name} | dokodemon"
+    assert_select 'title', full_title("BLOG-TITLE - #{@blog.user.name}")
       # = For Rails/ERb/provide Method
       # = NOT for URL Encoding.
       # => Should test if the Responded Blog Post's user name (@blog.user.name) is used.
 
+    assert_match "#{@user.name}", response.body
+    assert_match "BLOG-TITLE", response.body
+    assert_select 'div>img.gravatar'
   end
 end

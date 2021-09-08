@@ -1,11 +1,13 @@
-<% provide(:title, "TITLE - #{@blog.user.name}") %>
+<% provide(:title, "BLOG-TITLE - #{@user.name}") %>
 
 <div>
 
-	<h1>Showing Selected Blog Posts</h1>
+	<h1>BLOG-TITLE</h1>
 	<div>       
-		<%= render @user %>
+		<%= user_gravatar @user, size: 50 %>			
+		<%= @blog.user.name %>
 	</div>
+	</br>
 	<div>
 		<p>Content: <%= @blog.content %></p>
 	</div>
