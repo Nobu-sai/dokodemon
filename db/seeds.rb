@@ -23,7 +23,7 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   title = Faker::Quote.famous_last_words
-  text = Faker::Lorem.paragraphs(number: rand(10..100)).join('\r\n').gsub(/[\\r\\n]/, "\r\n")
+  text = Faker::Lorem.paragraphs(number: rand(2..10)).join('\r\n').gsub(/[\\r\\n]/, "\r\n")
   users.each { |user| user.blogs.create!(title: title, text: text) }
 end
 
