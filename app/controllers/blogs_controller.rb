@@ -6,10 +6,6 @@ class BlogsController < ApplicationController
     @blogs = Blog.all.paginate(page: params[:page])   
   end
 
-  def show
-    @blog = Blog.find(params[:id])
-    @user = User.find(@blog.user.id)
-  end
   
   def create
     @blog = current_user.blogs.build(blog_params)
@@ -23,6 +19,11 @@ class BlogsController < ApplicationController
     end
   end
 
+  def show
+    @blog = Blog.find(params[:id])
+    @user = User.find(@blog.user.id)
+  end
+  
   def destroy
     @blog.destroy
     flash[:success] = "The blog post was deleted!"
@@ -37,7 +38,7 @@ class BlogsController < ApplicationController
   private
 
     def blog_params
-      params.require(:blog).permit(:content, :image)
+      params.require(:blog).permit(:title, :text, :image)
     end
 
     def correct_user

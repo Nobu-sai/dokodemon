@@ -4,8 +4,7 @@
     <%= link_to blog.user.name, blog.user %>
   </span>
   <span class="content">    
-    <%= link_to "BLOG-TITLE", blog_post_path(:username => url_encoding(blog.user.name), :title => url_encoding("BLOG-TITLE"), :id => blog.id) %>
-    <%= blog.content %>
+    <%= link_to "#{blog.title}", blog_post_path(:username => url_encoding(blog.user.name), :title => url_encoding(blog.title), :id => blog.id) %>    
     <%= image_tag blog.display_image if blog.image.attached? %>
     
   </span>

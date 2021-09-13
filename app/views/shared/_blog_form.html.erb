@@ -1,7 +1,10 @@
 <%= form_with(model: @blog, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+  <div class="title-input">
+    <%= f.text_field :title, placeholder: "What is the title of post...?" %>
+  </div>
   <div class="field">
-    <%= f.text_area :content, placeholder: "What do you want to post...?" %>
+    <%= f.text_area :text, placeholder: "What do you want to write...?" %>
   </div>
   <%= f.submit "Post!", class: "btn btn-primary" %>
   <span class="image">

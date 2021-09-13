@@ -18,7 +18,7 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination' 
 
     # Should HAVE Links to each Blog Post Page.
-      assert_select 'a', text: 'BLOG-TITLE'
+      assert_select 'a', text: @blog.title
         # Should be actual Blog Title.
 
     # Should HAVE Links to delete OWN Blog Posts.

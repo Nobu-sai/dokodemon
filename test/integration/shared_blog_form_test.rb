@@ -13,20 +13,22 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
     assert_select 'input[type=file]'
     # Invalid submission
       assert_no_difference 'Blog.count' do
-        post blogs_path, params: { blog: { content: "" } }
+        post blogs_path, params: { blog: { title: "" } }
       end
       assert_select 'div#error_explanation'
       assert_select 'a[href=?]', '/?page=2'  # Correct pagination link
     # Valid submission
-      content = "This blog really ties the room together"
+      title = "This blog really ties the room together"
+      text = "#{f}*500"
       image = fixture_file_upload('test/fixtures/kitten.jpg', 'image/jpeg')
       assert_difference 'Blog.count', 1 do
         post blogs_path, params: { blog:
-                                      { content: content, image: image } }
+                                      { title: title, text: text, image: image } }
       end
       assert assigns(:blog).image.attached?
       assert_redirected_to root_url
       follow_redirect!
-      assert_match content, response.body
+      assert_match title, response.body
+      assert_match text, response.body
   end
 end

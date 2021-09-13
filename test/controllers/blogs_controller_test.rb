@@ -47,7 +47,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
   # Redirect 
     test "User NOT logged in & Try to create a Blog Post => Should Redirect to the Home Page" do
       assert_no_difference 'Blog.count' do
-        post blogs_path, params: { blog: { content: "Lorem ipsum" } }
+        post blogs_path, params: { blog: { title: "Lorem ipsum", text: "#{'f' * 500}'" } }
       end
       assert_redirected_to login_url
     end
