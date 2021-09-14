@@ -1,5 +1,4 @@
 require 'active_support/core_ext/string/inflections'
-require 'byebug'
 
 module UrlEncodingHelper
 	def url_encoding(url_string)		
