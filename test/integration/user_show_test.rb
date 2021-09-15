@@ -24,7 +24,7 @@ class UserShowTest < ActionDispatch::IntegrationTest
       assert_match "#{@another_user.blogs.count} Blog Posts", response.body
    
       # ANOTHER user MADE a Blog Post => Blog count should INCREASE.
-      @another_user.blogs.create!(content: "A blog")
+      @another_user.blogs.create!(title: "BLOG-TITLE", text: "BLOG-TEXT")
         # create! Method
           # => Makes the Blog Post REGARDLESS the Validation. 
       get users_path(@another_user) 

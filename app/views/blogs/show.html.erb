@@ -1,16 +1,16 @@
-<% provide(:title, "#{@blog.title}- #{@user.name}") %>
+<% provide(:title, "#{@blog.title} - #{@user.name}") %>
 
 <div>
 
-	<h1>BLOG-TITLE</h1>
+	<h1><%= simple_format_helper(@blog.title) %></h1>
 	<div>       
 		<%= user_gravatar @user, size: 50 %>			
 		<%= @blog.user.name %>
 	</div>
 	</br>
 	<h2>Content</h2>
-	<div>		
-		<%= simple_format(@blog.text) %>
+	<div class="blog_post__text">		
+		<%= simple_format_helper(@blog.text) %>
 	</div>
 	</div>
 

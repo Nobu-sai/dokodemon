@@ -88,7 +88,7 @@ class UserTest < ActiveSupport::TestCase
   
   test "A user is destroyed => The associated blogs should be destroyed" do
     @user.save
-    @user.blogs.create!(content: "Lorem ipsum")
+    @user.blogs.create!(title: "Lorem ipsum", text: "BLOG-TEXT")
     assert_difference 'Blog.count', -1 do
       @user.destroy
     end

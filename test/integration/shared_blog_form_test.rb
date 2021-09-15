@@ -17,9 +17,10 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
       end
       assert_select 'div#error_explanation'
       assert_select 'a[href=?]', '/?page=2'  # Correct pagination link
+
     # Valid submission
       title = "This blog really ties the room together"
-      text = "#{f}*500"
+      text = "#{'f' * 500}"
       image = fixture_file_upload('test/fixtures/kitten.jpg', 'image/jpeg')
       assert_difference 'Blog.count', 1 do
         post blogs_path, params: { blog:
@@ -28,7 +29,8 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
       assert assigns(:blog).image.attached?
       assert_redirected_to root_url
       follow_redirect!
-      assert_match title, response.body
-      assert_match text, response.body
+      # In the Home Page.
+      # => Blog Feed => HAS blog.title & Has NO blog.text
+        assert_match title, response.body      
   end
 end

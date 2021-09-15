@@ -17,8 +17,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     # User blogs
       assert_match @user.blogs.count.to_s, response.body
       assert_select 'div.pagination', count: 1
-      @user.blogs.paginate(page: 1).each do |blog|
-        assert_match blog.content, response.body
+      @user.blogs.paginate(page: 3).each do |blog|
+        assert_match blog.title, response.body        
       end
   end
   

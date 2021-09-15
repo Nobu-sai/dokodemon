@@ -12,8 +12,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
       # Request and Reponse
         get blogs_path
         assert_response :success      
-      # Reponse contents      
-        assert_select 'div.pagination'    
+
     end
 
     test "Request to the show Action with DEFAULT URL with ID => Should Route to the _blog.html.erb." do   

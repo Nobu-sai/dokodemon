@@ -8,6 +8,7 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @blog = @user.blogs.first
+    @user_2 = users(:archer)
   end
 
 
