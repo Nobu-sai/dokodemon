@@ -91,16 +91,15 @@ class User < ApplicationRecord
       reset_sent_at < 2.hours.ago
     end
   
-  # Fetch the right Blog Posts => Becomes the Array of Blog Posts diaplayed in the a proto-feed (app/views/shared/_feed.html.erb).
-    # * See "Following users" for the full implementation.
-    def feed
+  # Set Query to get the user IDs who the currently LOGGED IN user is FOLLOWING 
+    # How
+    # => Get ALL the Relationships/followed_id or all the users have followers
+    # =>> Compaire each of the FOLLOWERS with the id of the LOGGED IN user.
+    # =>>> Store the Follower IDs MATCHING to the LOGGED IN user ID.
+    def set_following_ids_query  
       following_ids = "SELECT followed_id FROM relationships
-                      WHERE  follower_id = :user_id"
-      Blog.where("user_id IN (#{following_ids})
-                      OR user_id = :user_id", user_id: id)
-                .includes(:user, image_attachment: :blob)
-
-    end
+      WHERE  follower_id = :current_user_id"
+    end        
   
   
   # Follows a user.
