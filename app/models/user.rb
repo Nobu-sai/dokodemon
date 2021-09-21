@@ -54,7 +54,10 @@ class User < ApplicationRecord
       remember_digest || remember
     end
   
-  # Returns true if the given token matches the digest.
+  # Check if the given token is METCHING to the DIGESTED token (saved in APP's database for each user)
+  # For (As attribute Param)
+  # - Activation
+  # - Remember Cookies
     def authenticated?(attribute, token)
       digest = send("#{attribute}_digest")
       return false if digest.nil?

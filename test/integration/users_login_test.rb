@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class UsersLoginTest < ActionDispatch::IntegrationTest
+class UsersLoginTest < ActionDispatch::IntegrationTest 
 
   def setup
     @user = users(:michael)
   end
 
-  test "login with valid email/invalid password" do
+  test "login with VALID email & INVALID password" do
     # P
       # Test the validity of email?
     get login_path
@@ -20,7 +20,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
-  test "login with valid information followed by logout" do
+  test "login with VALID information followed by logout" do
     get login_path
     post login_path, params: { session: { email:    @user.email,
                                           password: 'password' } }

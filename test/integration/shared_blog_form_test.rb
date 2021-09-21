@@ -11,6 +11,7 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
     get root_path
     # assert_select 'div.pagination'
     assert_select 'input[type=file]'
+
     # Invalid submission
       assert_no_difference 'Blog.count' do
         post blogs_path, params: { blog: { title: "" } }
@@ -29,6 +30,7 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
       assert assigns(:blog).image.attached?
       assert_redirected_to root_url
       follow_redirect!
+      
       # In the Home Page.
       # => Blog Feed => HAS blog.title & Has NO blog.text
         assert_match title, response.body      
