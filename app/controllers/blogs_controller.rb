@@ -5,7 +5,6 @@ class BlogsController < ApplicationController
   def index    
     @blogs = Blog.all.paginate(page: params[:page])   
   end
-
   
   def create
     @blog = current_user.blogs.build(blog_params)
@@ -15,7 +14,7 @@ class BlogsController < ApplicationController
       redirect_to root_url
     else
       # @feed_items = current_user.feed.paginate(page: params[:page])
-      @feed_items = blog_posts_feed.paginate(page: params[:page])
+      @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end

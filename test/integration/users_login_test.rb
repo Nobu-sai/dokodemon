@@ -46,9 +46,12 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     		# => Clicking the “Log out” link in a second window would result in an error because of forget(current_user) in the log_out method
     delete logout_path
     follow_redirect!
-    assert_select "a[href=?]", login_path
-    assert_select "a[href=?]", logout_path,      count: 0
-    assert_select "a[href=?]", user_path(@user), count: 0
+    # Header
+      assert_select "a[href=?]", login_path
+      assert_select "a[href=?]", logout_path, count: 0
+      assert_select "a[href=?]", user_path(@user), text: "Profile",count: 0
+      # Now there ARE link_to @user inside Blog Posts Feed
+    
   end
   
    test "login with remembering" do
