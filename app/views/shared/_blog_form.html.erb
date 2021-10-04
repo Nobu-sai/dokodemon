@@ -1,14 +1,15 @@
-<%= form_with(model: @blog, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<%= form_with model: @blog, local: false, id: "blog_form" do |f| %>
+  <%= render 'shared/error_messages', object: f.object %> 
+
   <div class="title-input">
-    <%= f.text_field :title, placeholder: "What is the title of post...?" %>
+    <%= f.text_field :title, id: "blog_form_title", placeholder: "What is the title of post...?" %>
   </div>
   <div class="field">
-    <%= f.text_area :text, placeholder: "What do you want to write...?" %>
+    <%= f.text_area :text, id: "blog_form_text", placeholder: "What do you want to write...?" %>
   </div>
-  <%= f.submit "Post!", class: "btn btn-primary" %>
+  <%= f.submit "Post!", class: "btn btn-primary", id: "blog_form_btn" %>
   <span class="image">
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+    <%= f.file_field :image, id: "blog_form_file", accept: "image/jpeg,image/gif,image/png" %>
   </span>
 
   <script type="text/javascript">

@@ -1,13 +1,13 @@
 # Instruction
-  # @feed_items 
+  # @blog_posts_feed
     # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
-	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed as VARIABLE_items in the View.
+	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
 
 <% if @blog_posts_feed.any? %>
   <ol class="blogs">
     <%= render @blog_posts_feed %>
-  </ol> 
-   <%= will_paginate @blog_posts_feed,
-                    params: { controller: :static_pages, action: :home } 
-                    %>
+  </ol>  
+   
+  <%= will_paginate @blog_posts_feed
+  %>
 <% end %>

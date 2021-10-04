@@ -17,7 +17,8 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
         post blogs_path, params: { blog: { title: "" } }
       end
       assert_select 'div#error_explanation'
-      assert_select 'a[href=?]', '/?page=2'  # Correct pagination link
+      assert_select 'a[href=?]', '/?page=2'  
+        # Correct pagination link
 
     # Valid submission
       title = "This blog really ties the room together"
