@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include StoreCurrentPathHelper
   include BlogPostsFeedHelper
-  # before_action :store_current_path
-  # before_action :track_page_path
   before_action :track_page_path
   
   private  
@@ -19,7 +17,6 @@ class ApplicationController < ActionController::Base
       end
     end 
     def track_page_path
-      store_current_path controller_name, action_name
-      # store_current_path params[:controller], params[:action]
+      store_current_path controller_name, action_name      
     end
 end

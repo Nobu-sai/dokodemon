@@ -10,11 +10,6 @@ class BlogsController < ApplicationController
     @blog = current_user.blogs.build(blog_params)    
     @blog.image.attach(params[:blog][:image])
     
-    # forwarding_url = session[:forwarding_url]
-    # current = session[:current_path] 
-    # controller = store_current_path.controller
-    # action = store_current_path.action
-
     respond_to do |format|
     
       if @blog.save
