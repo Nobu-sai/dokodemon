@@ -6,32 +6,28 @@ class BlogsController < ApplicationController
     @blogs = Blog.all.paginate(page: params[:page])   
   end
   
-  # def new
-  #   @blog = Blog.new
-  #   render 'static_pages/home'
-  # end
-
   def create
-    @blog = current_user.blogs.build(blog_params)
-    # @blog = Blog.create(blog_params)
-
+    @blog = current_user.blogs.build(blog_params)    
     @blog.image.attach(params[:blog][:image])
     
-    respond_to do |format|
+    # forwarding_url = session[:forwarding_url]
+    # current = session[:current_path] 
+    # controller = store_current_path.controller
+    # action = store_current_path.action
 
+    respond_to do |format|
+    
       if @blog.save
-        flash[:success] = "The new blog post was created!"
-        redirect_to root_url        
-          format.html { redirect_to root_url }           
+        flash[:success] = "The new blog post was created!"           
+        format.html { redirect_to root_url }           
       else      
         @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
           # P
           # - On failed submission        
-                
+        # format.html 
+        # format.html { redirect_to root_url }
         format.html { render 'static_pages/home' }       
-        
-          # render json: { errors: @blog },
-          # status: :unprocessable_entity        
+
       end
     end
 

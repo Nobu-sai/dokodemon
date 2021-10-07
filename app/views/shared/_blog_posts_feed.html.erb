@@ -8,6 +8,7 @@
     <%= render @blog_posts_feed %>
   </ol>  
    
-  <%= will_paginate @blog_posts_feed
+  <%= will_paginate @blog_posts_feed,
+    :params => {:controller => @controller_name, :action => @action_name }
   %>
 <% end %>

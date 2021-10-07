@@ -7,9 +7,13 @@
   <div class="field">
     <%= f.text_area :text, id: "blog_form_text", placeholder: "What do you want to write...?" %>
   </div>
-  <%= f.submit "Post!", class: "btn btn-primary", id: "blog_form_btn" %>
-  <span class="image">
+  <div class="field">
     <%= f.file_field :image, id: "blog_form_file", accept: "image/jpeg,image/gif,image/png" %>
+    <span class="image">
+  </div>
+  <div>
+  <%= f.submit "Post!", class: "btn btn-primary", id: "blog_form_btn" %>
+  </div>
   </span>
 
   <script type="text/javascript">
