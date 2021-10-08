@@ -19,8 +19,6 @@ class BlogsController < ApplicationController
         @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
           # P
           # - On failed submission        
-        # format.html 
-        # format.html { redirect_to root_url }
         format.html { render 'static_pages/home' }       
 
       end

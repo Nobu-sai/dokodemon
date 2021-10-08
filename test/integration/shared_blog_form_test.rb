@@ -31,14 +31,24 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     
     assert_select 'a[href=?]', '/?page=2'  
-      # => Confirm Ajax
-      # => The URL should be should be AS IT WAS BEFORE the failed submission
-      # P 
-      #  - Issue 
-        # When Wihtout Ajax & Failed Submission & Click a Pagination Button 
-          # -  Since the Failed Submission (POST Request) changes the URL (Route to the Controller Action mathing to the Model) 
-          # -> Clicking a Pagination Button will Link to ANOTHER or UNEXPECTED URL          
-      
+      # What to Test
+      # - X Confirm Ajax
+        # => The URL should be should be AS IT WAS BEFORE the failed submission
+        # * Actually, the URL should NOT change
+        # * BUT, it is NOT relevant to Pagination Button Links
+      # - Confirm the Pagination Button Links (a Tag href) NOT to change | to be AS it WAS
+        # - IF the Link was clicked in Home Page, 
+          # => The URL should be Home Page
+        # P 
+        #  - Issue 
+          # = A user Sends Failed Submission 
+            # -> A user vlicks a Pagination Button 
+            # -> Rails Links to UNEXPECTED page DIFFERENT from where the user WAS  
+              # Ex
+              # - Home Page (as StaticPageController/home Action) Sending Failed Submission to BlogsController/create Action)
+                # - evernote:///view/180370944/s350/8e940c01-e0ca-9522-5f08-87ab3746f3a1/77812575-71c1-4561-9362-9c31a7a32180
+        # How
+        # - evernote:///view/180370944/s350/0a9efe6d-50e4-cb9a-1c21-9568aa68b0f2/77812575-71c1-4561-9362-9c31a7a32180 
   end  
 
   test "Valid submission" do
