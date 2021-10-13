@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  include StoreCurrentPathHelper
+  include SessionStoreCurrentPathHelper
   include BlogPostsFeedHelper
   before_action :track_page_path
   
@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
       end
     end 
     def track_page_path
-      store_current_path controller_name, action_name      
+      session_store_current_path controller_name, action_name      
     end
 end

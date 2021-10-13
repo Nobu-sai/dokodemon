@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   
   root 'static_pages#home'   
+  get '/',    to: 'static_pages#home'
   get '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
@@ -25,15 +26,14 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  
 
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :blogs
-    # C
-    # - Issue
-    # = When Failed Submission & Click Pagination Button
-    # => Routed to .../blogs?page=NUMBER URL  
-  # resources :blogs, only: [:destroy, :create]
+    # Should include GET
+    # > P: EACH Blog Post using blog_path Routing Helper
+
   resources :relationships,       only: [:create, :destroy]
 end

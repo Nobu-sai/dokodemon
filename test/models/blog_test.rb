@@ -10,21 +10,23 @@ class BlogTest < ActiveSupport::TestCase
       # - The blog Model is ASSOCIATED with user Model => The user_id is AUTOMATICALLY added when making a new blog post Noting a user.
   end
 
-  test "Post a new blog post with Valid contents => Should be valid" do
+  # Valid
+  test "Valid Blog Post Submission => Valid" do
     assert @blog.valid?
   end
 
-  test "Post a new blog post WITHOUT a user_id Field => Should be invalid" do
+  # Invalid
+  test "Blog Post Submission (WITHOUT a user_id Field) => Invalid" do
     @blog.user_id = nil
     assert_not @blog.valid?
   end
   
-  test "Post a new blog post WITHOUT REQUIRED contents => Should be invalid" do
+  test "Blog Post Submission (WITHOUT REQUIRED contents) => Invalid" do
     @blog.title = "   "
     assert_not @blog.valid?
   end
 
-  test "Post a new blog post ABOVE the LIMIT text length (140) => Invalid" do
+  test "Blog Post Submission (ABOVE the LIMIT text length (140)) => Invalid" do
     @blog.title = "a" * 141
     assert_not @blog.valid?
   end
