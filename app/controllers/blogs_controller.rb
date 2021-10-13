@@ -15,31 +15,14 @@ class BlogsController < ApplicationController
       if @blog.save
 
         flash[:success] = "The new blog post was created!"           
-        # format.any { redirect_to root_url => {:response => 'Redireced to the previous page' },:status => 302  }
 
         format.html { redirect_to root_url }           
-        # format.html { redirect_to root_url, status: :redirect }   
-          # => ArgumentError: Unrecognized status code :redirect
-        # format.html { redirect_to root_url, status: 300  }           
-        # format.html { redirect_to root_url, status: 302  }           
-        # format.html { redirect_to root_url, status: :multiple_choices  }           
-        # format.html { redirect_to controller: :static_pages, action: :home }           
-        # format.html { redirect_to controller: :static_pages, action: :home, status: 300 }           
-        # format.html { redirect_back fallback_location: root_path}
-
-        # @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
-        # format.html { render 'static_pages/home', status: 200 }       
       else      
 
         @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
           # P
           # - On failed submission        
         format.html { render 'static_pages/home', status: 400 }       
-        # format.html { render 'static_pages/home', status: 300 }       
-        # format.html { render 'static_pages/home', status: :bad_request }       
-        # format.html { redirect_to root_url }
-        # format.html { redirect_to root_url, status: 400 }           
-        # format.html { redirect_to blogs_url }          
  
       end
         
