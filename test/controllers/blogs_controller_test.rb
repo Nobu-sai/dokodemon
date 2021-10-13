@@ -1,3 +1,5 @@
+# Src
+# - evernote:///view/180370944/s350/97aba4df-8996-79b0-b6d4-e733058166c3/77812575-71c1-4561-9362-9c31a7a32180
 require 'test_helper'
 
 class BlogsControllerTest < ActionDispatch::IntegrationTest
@@ -113,9 +115,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
               # = evernote:///view/180370944/s350/367d324b-f2d5-bf57-6895-5cd18cd83401/77812575-71c1-4561-9362-9c31a7a32180
 
       end      
-      assert_response 400
-      # assert_not_equal @response.response_code, 200       
-        # - Actually, BlogsController/create Action/Invalid Submission Case Responds with 400.
+      assert_response 400      
       assert_template "static_pages/home"
         # => Checks the Response
       # NOT
