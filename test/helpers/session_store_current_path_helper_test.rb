@@ -6,5 +6,6 @@ class SessionsStoreCurrentPathHelperTest < ActionDispatch::IntegrationTest
 		assert_response :success
 		assert session[:current_controller] 
 		assert session[:current_action]
+		assert session[:string_path]
 	end
 end

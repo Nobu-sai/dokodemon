@@ -16,13 +16,14 @@ class BlogsController < ApplicationController
 
         flash[:success] = "The new blog post was created!"           
 
-        format.html { redirect_to root_url }           
+        format.html { redirect_to controller: session[:current_controller], action: session[:current_action] }           
+          # - String Path can NOT be used
       else      
 
         @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
           # P
           # - On failed submission        
-        format.html { render 'static_pages/home', status: 400 }       
+        format.html { render "#{session[:string_path]}", status: 400 }       
  
       end
         

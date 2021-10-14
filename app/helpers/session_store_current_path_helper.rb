@@ -7,6 +7,7 @@ module SessionStoreCurrentPathHelper
             if request.get? 
                   session[:current_controller] = controller_name
                   session[:current_action] = action_name                             
+                  session[:string_path] = "#{controller_name}/#{action_name}"
             end     
             
       end
