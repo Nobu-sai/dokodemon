@@ -37,14 +37,22 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
   end
 
   # UX
-    test "Click the Link to ROUTE to a Blog Post Page => Should Route to the Blog Page" do
+    test "Click a Blog Post Link (ROUTE)" do
+      # What to Test
+      # - Should Route to the Blog Page
+      # - Should Render "blogs/show View File"
+
       log_in_as(@user)     
       get blog_post_path(:username => url_encoding(@blog.user.name), :title => url_encoding("BLOG-TITLE"), :id => @blog.id)
       assert_template 'blogs/show'        
     end
 
-    test "Click the Link to DELETE a Blog Post => Should decrease the Blog Count" do
-      
+    test "Click a Blog Post Link (DELETE)" do
+      # What to Test
+      # - When the Delete Button is clicked 
+      # => Should decrease the Blog Count by 1 
+
+
       # Try to delete OWN Blog Posts.
         # * OTHER users' delete Link should NOT be had at first.
         log_in_as(@user)

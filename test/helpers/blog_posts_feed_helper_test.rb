@@ -11,46 +11,38 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
     @lana = users(:lana)
   end
 
-  test "NO login => Should show all posts" do
-    # Fulfill required state by BlogPostsFeedHelper 
-      # How
-      # - Login with INVALID information 
-        # => NO Login is enrolled
-        # P
-        # - Make session Method availbe to check Login using SessionsHelper
-        # post login_path, params: { session: { email:    @michael.email,
-        # password: "invalid" } }
-        # assert_not is_logged_in?      
-      # - Log in with VALID information
-        # -> Remember 
-        # -> Log out -> Get Feed
+  # Output = Feed should have ALL Blog Posts   
+  test "NO Login" do
+    # What to do
+    # /Requerements
+    # X - Fulfill required LOGIN state by BlogPostsFeedHelper 
+      # C
+      # - Now NO LOGIN required
+    # /Subject
+    # - Feed should have ALL the Blog Posts
 
-      # post login_path, params: { session: { email:    @michael.email,
-      #                                       password: 'password' } }
-      # log_in_as(@michael)
-      # assert logged_in?
-      # log_out
-      # # forget(current_user)
+      
       assert_not logged_in?      
 
       
-
-    # Fecth an Array of Feed
-    # => Can not be used Active Record/all Method
-      @blog_posts_feed = blog_posts_feed  
-      
-    # Confirm all the Blog Posts are contained in the Feed
-      @blog_posts_feed.each do |blog_post|
-        assert @blog_posts_feed.include?(blog_post)    
+    # Feed should have ALL the Blog Posts
+      # blog_posts_feed.each do |blog_post| 
+      Blog.all.each do |blog_post|
+        # assert blog_posts_feed.include?(blog_post)    
+        # assert Blog.all.include?(blog_post)    
+        # assert_includes(Blog.all, blog_post)
+        assert_includes(blog_posts_feed, blog_post)
       end    
+      
   end
-
-  test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
+  
+  # Output = Feed Should have the Blog Posts by right users
+  test "WITH Login & Having different FOLLOW Relationship (Ex: Follows others or not)" do      
     current_user = @michael
     log_in_as(current_user)
 	  @blog_posts_feed = blog_posts_feed 
 
-    # Blog Posts by the users the Current User is FOLLOWING => Should BE included. 
+    # Blog Posts by the user the Current User is FOLLOWING => Should BE included. 
       @blog_posts_feed.include?(@lana)
 
     # Self-posts for user WITH followers => Should BE included. 

@@ -20,7 +20,7 @@ class BlogsController < ApplicationController
           # - String Path can NOT be used
       else      
 
-        @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
+        # @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
           # P
           # - On failed submission        
         format.html { render "#{session[:string_path]}", status: 400 }       

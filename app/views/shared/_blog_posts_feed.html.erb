@@ -1,14 +1,22 @@
 # Instruction
   # @blog_posts_feed
-    # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
-	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
+  # blog_posts_feed Variable
+    # From
+      # X - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
+      # - app/helpers/blog_posts_feed_helper.rb
+    # Facts
+    # - When Rails/ActiveRecord/where Method Fetches data from the Database, 
+      # - it makes an Array of FETCHED Data 
+      # X - which can be accessed in the View.
+        # C 
+        # - Depending on the Execution Context
 
-<% if @blog_posts_feed.any? %>
+<% if blog_posts_feed.any? %>
   <ol class="blogs">
-    <%= render @blog_posts_feed %>
+    <%= render blog_posts_feed %>
   </ol>  
    
-  <%= will_paginate @blog_posts_feed,
+  <%= will_paginate blog_posts_feed,
     :params => {:controller => session[:current_controller], :action => session[:current_action] }
     # => Setting Link URL (a Tag href Value) with CURRENT URL | Controller Action(where the Pagination Link is Rendered) 
     # =>> Link there regardless the REAL Controller Action (Request Sent)
