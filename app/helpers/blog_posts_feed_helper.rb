@@ -27,32 +27,9 @@ module BlogPostsFeedHelper
 	else
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		# @blog_posts_feed = 
-		# @blog_posts_feed = 
-		# Blog.all.includes(:user, image_attachment: :blob)
-		# Blog.find_in_batches.includes(:user, image_attachment: :blob)
-		# Blog.find_each.includes(:user, image_attachment: :blob)
-		# Blog.in_batches.includes(:user, image_attachment: :blob)
 		
-		# Case.1
-		# Blog.includes(:user, image_attachment: :blob)
-		# Blog.includes(:user, image_attachment: :blob).all
-		# Blog.includes(:user, image_attachment: :blob).find_each
-
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches 
-		Blog.includes(:user, image_attachment: :blob).find_in_batches.first 
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches do |blog_posts_feed|
-		# 	return blog_posts_feed
-		# end
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches.each_with_object()
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches.each_record
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches.each
-		# Blog.includes(:user, image_attachment: :blob).find_in_batches.first
-		
-		# Blog.includes(:user, image_attachment: :blob).in_batches
-		# Blog.includes(:user, image_attachment: :blob).in_batches.each_record
+		# Case.2
 		# Blog.includes(:user, image_attachment: :blob).in_batches.first
-		# Blog.in_batches.first.includes(:user, image_attachment: :blob)
 	end
     end
 	
