@@ -12,37 +12,15 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
   end
 
   test "NO login => Should show all posts" do
-    # Fulfill required state by BlogPostsFeedHelper 
-      # How
-      # - Login with INVALID information 
-        # => NO Login is enrolled
-        # P
-        # - Make session Method availbe to check Login using SessionsHelper
-        # post login_path, params: { session: { email:    @michael.email,
-        # password: "invalid" } }
-        # assert_not is_logged_in?      
-      # - Log in with VALID information
-        # -> Remember 
-        # -> Log out -> Get Feed
-
-      # post login_path, params: { session: { email:    @michael.email,
-      #                                       password: 'password' } }
-      # log_in_as(@michael)
-      # assert logged_in?
-      # log_out
-      # # forget(current_user)
       assert_not logged_in?      
-
       
-
-    # Fecth an Array of Feed
-    # => Can not be used Active Record/all Method
-      # @blog_posts_feed = blog_posts_feed  
+    # Fecth an Array of Feed    
+      @blog_posts_feed = blog_posts_feed  
       
-    # Confirm all the Blog Posts are contained in the Feed
-      # @blog_posts_feed.each do |blog_post|
-      #   assert @blog_posts_feed.include?(blog_post)    
-      # end    
+    # Confirm all the Blog Posts are contained in the Feed      
+      Blog.all.each do |blog_post|
+        assert @blog_posts_feed.include?(blog_post)    
+      end           
   end
 
   test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
