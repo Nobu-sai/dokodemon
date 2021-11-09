@@ -3,6 +3,11 @@ class StaticPagesController < ApplicationController
   def home
     
     @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
+    # @blog_posts_feed = blog_posts_feed do |blog_posts_feed |
+      # blog_posts_feed.paginate(page: params[:page])
+      # blog_posts_feed.first.paginate(page: params[:page])
+    # end
+    # @blog_posts_feed = blog_posts_feed.each_record.paginate(page: params[:page])
     
     if logged_in?
       @blog  = current_user.blogs.build      
