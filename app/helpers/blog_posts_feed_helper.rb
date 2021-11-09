@@ -15,8 +15,6 @@ module BlogPostsFeedHelper
 		following_ids = current_user.set_following_ids_query
 			
 		# Get the Blog Posts based on the gotten ids		
-		# @blog_posts_feed =
-		# @blog_posts_feed = 
 		 Blog.where("user_id IN (#{following_ids})
 				OR user_id = :current_user_id", current_user_id: "#{current_user.id}")
 				.includes(:user, image_attachment: :blob)
@@ -27,9 +25,7 @@ module BlogPostsFeedHelper
 	else
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		
-		# Case.2
-		# Blog.includes(:user, image_attachment: :blob).in_batches.first
+		Blog.includes(:user, image_attachment: :blob).in_batches.first
 	end
     end
 	
