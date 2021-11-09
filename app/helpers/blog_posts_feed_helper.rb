@@ -4,7 +4,8 @@ module BlogPostsFeedHelper
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
     def blog_posts_feed
-
+	
+	
 	# IF the user IS logged in
 	if logged_in?
 		# What to do
