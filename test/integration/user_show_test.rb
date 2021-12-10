@@ -1,7 +1,9 @@
 
 # For users/_user.html.erb
-# Chack the Blot Posts about in test/fixtures/blogs.yml. 
+# Check the Blog Posts in test/fixtures/blogs.yml. 
 require 'test_helper'
+include BlogPostsFeedHelper
+include UrlEncodingHelper
 
 class UserShowTest < ActionDispatch::IntegrationTest
 
@@ -9,6 +11,61 @@ class UserShowTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
     @another_user = users(:malory)
   end
+
+  test "SHOULD contain" do
+    # HTML File and its contents
+      get user_path(@user)
+      assert_template 'users/show'
+      assert_select 'title', full_title(@user.name)
+      assert_select 'h1', text: @user.name
+      assert_select 'h1>img.gravatar'
+      assert_match @user.blogs.count.to_s, response.body
+      assert_template 'shared/_stats'  
+
+    
+      # Render Blogs Posts Feed (ones by the user)
+      assert_select 'div.pagination', count: 1
+
+      
+      # debugger
+      # @user.blogs.paginate(page: 1).each do |blog| 
+      # @user.blogs.paginate(page: 3).each do |blog|
+        # debugger
+      # @user.blogs.paginate(page: 11).each do |blog|
+      # @user.blogs.paginate(page: 12).each do |blog|
+      # @user.blogs.paginate(page: 13).each do |blog|
+      @user.blogs.paginate(page: 300).each do |blog|
+      # @user.blogs.paginate(page: 3000).each do |blog|
+        # debugger
+      # @user.blogs.paginate(page: 11).each do |blog|
+      # @user.blogs.paginate(params[:page]).each do |blog|
+      # blog_posts_feed.each do | blog | 
+
+        # assert_match blog, response.body        
+        # assert_match blog.title, response.body        
+        assert_match url_encoding(blog.title), response.body         
+        # response.body =~ blog.title
+        # blog_title = Regexp.new Regexp.escape blog.title if String === blog.title
+        # assert response.body =~ blog_title
+        # assert blog_title =~ response.body
+        # debugger 
+        # put blog_title =~ response.body 
+
+        # puts response.body =~ blog.title 
+        # puts response.body =~ Regexp.new Regexp.escape blog.title 
+
+        # assert_match response.body, blog.title
+        # assert_match response.body, Regexp.escape blog.title
+        # assert_match response.body, Regexp.new(Regexp.escape(blog.title))
+
+        # response.body.match?(blog.title)
+        # blog.title.match?(response.body)
+        # blog.title.match(response.body)
+        # response.body.match(blog.title)
+
+      end
+  end
+  
 
   test "Users with different amount of Blog Posts => Show DIFFERENT Blog Post Counts" do
    

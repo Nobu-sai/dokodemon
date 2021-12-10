@@ -18,7 +18,8 @@ module BlogPostsFeedHelper
 		# Get the Blog Posts based on the gotten ids		
 		 Blog.where("user_id IN (#{following_ids})
 				OR user_id = :current_user_id", current_user_id: "#{current_user.id}")
-				.includes(:user, image_attachment: :blob)
+				.includes(:user, image_attachment: :blob)				
+				
 					# = Eager Loading
 						# - For Active Storage n + 1 Query Problem 		
 							# evernote:///view/180370944/s350/1ab665fe-df8c-1211-4eac-6c4571986d4c/77812575-71c1-4561-9362-9c31a7a32180		

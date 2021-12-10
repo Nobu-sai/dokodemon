@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
-
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
   end
@@ -14,7 +13,6 @@ class UsersController < ApplicationController
     @blogs = @user.blogs.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
   end
-
 
   def new
     @user = User.new

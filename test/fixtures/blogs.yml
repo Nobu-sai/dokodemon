@@ -21,17 +21,15 @@ most_recent:
   text: <%= Faker::Lorem.paragraphs(number:4) %>
   created_at: <%= Time.zone.now %>
   user: michael
-  
 
-<% 30.times do |n| %>
+
+<% 300.times do |n| %>
 blog_<%= n %>:
   title: <%= Faker::Quote.famous_last_words %>
   text: <%= Faker::Lorem.paragraphs(number:10) %>
   created_at: <%= 42.days.ago %>
   user: michael
 <% end %>
-
-
 
 
 ants:
@@ -46,6 +44,10 @@ zone:
   created_at: <%= 3.days.ago %>
   user: archer
 
+
+
+
+
 tone:
   title: <%= Faker::Quote.famous_last_words %>
   text: <%= Faker::Lorem.paragraphs(number:5) %>
@@ -57,3 +59,4 @@ van:
   text: <%= Faker::Lorem.paragraphs(number:4) %>
   created_at: <%= 4.hours.ago %>
   user: lana
+
