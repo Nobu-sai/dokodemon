@@ -14,7 +14,7 @@ class UserShowTest < ActionDispatch::IntegrationTest
 
   test "SHOULD contain" do
     # HTML File and its contents
-      get user_path(@user)
+      get user_path(@user, page: 1000)
       assert_template 'users/show'
       assert_select 'title', full_title(@user.name)
       assert_select 'h1', text: @user.name
@@ -29,12 +29,12 @@ class UserShowTest < ActionDispatch::IntegrationTest
       
       # debugger
       # @user.blogs.paginate(page: 1).each do |blog| 
-      # @user.blogs.paginate(page: 3).each do |blog|
+      @user.blogs.paginate(page: 1000).each do |blog|
         # debugger
       # @user.blogs.paginate(page: 11).each do |blog|
       # @user.blogs.paginate(page: 12).each do |blog|
       # @user.blogs.paginate(page: 13).each do |blog|
-      @user.blogs.paginate(page: 300).each do |blog|
+      # @user.blogs.paginate(page: 300).each do |blog|
       # @user.blogs.paginate(page: 3000).each do |blog|
         # debugger
       # @user.blogs.paginate(page: 11).each do |blog|
