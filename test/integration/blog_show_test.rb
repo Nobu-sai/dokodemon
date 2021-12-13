@@ -1,8 +1,6 @@
 
 require 'test_helper'
-# require 'action_view/helpers'
 include UrlEncodingHelper
-# include ActionView::Helpers
 include SimpleFormatHelper
 
 class BlogShowTest < ActionDispatch::IntegrationTest
