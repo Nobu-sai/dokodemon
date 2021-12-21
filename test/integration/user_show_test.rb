@@ -51,7 +51,7 @@ class UserShowTest < ActionDispatch::IntegrationTest
         # create! Method
           # => Makes the Blog Post REGARDLESS the Validation. 
       get users_path(@another_user) 
-      assert_match "#{@another_user.blogs.count} Blog Post", response.body
+      assert_match "#{@another_user.blogs.count} Blog Post", response.body      
 
   end
 
