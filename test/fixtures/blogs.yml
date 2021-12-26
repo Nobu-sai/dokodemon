@@ -23,7 +23,7 @@ most_recent:
   user: michael
 
 
-<% 300.times do |n| %>
+<% 1000.times do |n| %>
 blog_<%= n %>:
   title: <%= Faker::Quote.famous_last_words %>
   text: <%= Faker::Lorem.paragraphs(number:10) %>
