@@ -13,10 +13,12 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
 
   test "NO login => Should show all posts" do
       assert_not logged_in?      
+
       
     # Fecth an Array of Feed    
-      @blog_posts_feed = blog_posts_feed  
-     
+      @blog_posts_feed = blog_posts_feed(1)  
+      @blog_posts_feed_2 = blog_posts_feed(2)  
+           
       
     # Confirm ALL the Blog Posts are contained in the Feed      
       Blog.all.each do |blog_post|

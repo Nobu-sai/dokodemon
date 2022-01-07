@@ -3,11 +3,14 @@ module BlogPostsFeedHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def blog_posts_feed
+    def blog_posts_feed(number)
 	
-	if session[:blog_post_feed_start] 
-		session[:blog_post_feed_start] += 10_000
+    
+	if number > 1
+		session[:blog_post_feed_batch_number] += 1
+		session[:blog_post_feed_start] += 100
 	else 
+		session[:blog_post_feed_batch_number] = 1
 		session[:blog_post_feed_start] = 1		
 	end
 
@@ -33,7 +36,7 @@ module BlogPostsFeedHelper
 	else
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		Blog.includes(:user, image_attachment: :blob).in_batches(start: session[:blog_post_feed_start]).first
+		Blog.includes(:user, image_attachment: :blob).in_batches(of: 100, start: session[:blog_post_feed_start])
 	end
     end
 	
