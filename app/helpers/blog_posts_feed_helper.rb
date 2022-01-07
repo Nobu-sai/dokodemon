@@ -35,7 +35,7 @@ module BlogPostsFeedHelper
 	else
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		Blog.includes(:user, image_attachment: :blob).in_batches(of: 10_000, start: session[:blog_post_feed_start], finish: session[:blog_post_feed_finish])
+		Blog.includes(:user, image_attachment: :blob).in_batches(of: 10_000, start: session[:blog_post_feed_start], finish: session[:blog_post_feed_finish]).first
 	end
     end
 	
