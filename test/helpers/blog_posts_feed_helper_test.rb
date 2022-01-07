@@ -18,6 +18,7 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
       @blog_posts_feed = blog_posts_feed  
       
       
+        debugger
     # Confirm ALL the Blog Posts are contained in the Feed      
       Blog.all.each do |blog_post|
         assert @blog_posts_feed.include?(blog_post)    

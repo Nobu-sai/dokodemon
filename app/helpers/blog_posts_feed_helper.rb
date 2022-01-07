@@ -5,13 +5,13 @@ module BlogPostsFeedHelper
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
     def blog_posts_feed
 	
-	if session[:blog_post_feed_start] && session[:blog_post_feed_finish] 
-		session[:blog_post_feed_start] += 10_000
-		session[:blog_post_feed_finish] += 10_000
-	else 
+	# if session[:blog_post_feed_start] && session[:blog_post_feed_finish] 
+	# 	session[:blog_post_feed_start] += 10_000
+	# 	session[:blog_post_feed_finish] += 10_000
+	# else 
 		session[:blog_post_feed_start] = 1
 		session[:blog_post_feed_finish] = 10_000
-	end
+	# end
 
 	
 	# IF the user IS logged in
