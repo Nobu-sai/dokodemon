@@ -3,15 +3,16 @@ module BlogPostsFeedHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def blog_posts_feed(number)
+    def blog_posts_feed(current_fetch_call_number, batch_size)
 	
     
-	if number > 1
-		session[:blog_post_feed_batch_number] += 1
-		session[:blog_post_feed_start] += 100
+	if current_fetch_call_number > git l1
+		# session[:blog_post_feed_batch_number] += 1
+		# session[:blog_post_feed_start] += 100
+		session[:blog_post_feed_start] += batch_size
 	else 
-		session[:blog_post_feed_batch_number] = 1
-		session[:blog_post_feed_start] = 1		
+		# session[:blog_post_feed_batch_number] = 1
+		session[:blog_post_feed_start] = 1
 	end
 
 	

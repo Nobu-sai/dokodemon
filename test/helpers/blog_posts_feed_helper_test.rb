@@ -13,17 +13,39 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
 
   test "NO login => Should show all posts" do
       assert_not logged_in?      
-
-      
-    # Fecth an Array of Feed    
-      @blog_posts_feed = blog_posts_feed(1)  
-      @blog_posts_feed_2 = blog_posts_feed(2)  
+    # Fecth an Array of Feed     
+      # @blog_posts_feed = blog_posts_feed(1)  
+      # @blog_posts_feed_2 = blog_posts_feed(2)  
            
       
     # Confirm ALL the Blog Posts are contained in the Feed      
-      Blog.all.each do |blog_post|
-        assert @blog_posts_feed.include?(blog_post)    
-      end           
+      # Blog.all.each do |blog_post|
+      #   assert @blog_posts_feed.include?(blog_post)    
+      # end           
+
+      
+        @blog_posts_feed
+        batch_size_number = 100
+        blog_records_number = Blog.count
+        total_fetch_call_number = blog_records_number / batch_size_number
+        current_fetch_call_number = 1
+        current_batch_start = 1        
+
+        while current_fetch_call_number <= total_fetch_call_number do 
+          all_blog_posts = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size_number, start: current_batch_start)
+          all_blog_posts.each do | blog_post | 
+            @blog_posts_feed = blog_posts_feed(current_fetch_call_number, batch_size_number)   
+            assert @blog_posts_feed.include?(blog_post)    
+          end
+          current_fetch_call_number += 1
+          current_batch_start += batch_size_number
+
+          # If all the blog posts 
+        
+        end
+
+      
+
   end
 
   test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
