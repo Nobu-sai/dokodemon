@@ -1,21 +1,25 @@
+# What it does
+# - Fetch Blog Records -> Return an Array has BATCHES of Records
+	# - Fetch Blog Records as Batches 
+	#   => in_batches
+	# - Store each Batch into an Array -> Return it 
+	#   => @blog_posts_feed
+# Facts
+# - The Returned Object (by in_batches) is ActivbeRecord::Relation Class => Records are editable
+
+# How to use
+# - Send Batch size 
+# - Loop over the Array -> Show | Edit 
+
 module BlogPostsFeedHelper
 	include SessionsHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def blog_posts_feed(current_fetch_call_number, batch_size)
-	
-    
-	if current_fetch_call_number > git l1
-		# session[:blog_post_feed_batch_number] += 1
-		# session[:blog_post_feed_start] += 100
-		session[:blog_post_feed_start] += batch_size
-	else 
-		# session[:blog_post_feed_batch_number] = 1
-		session[:blog_post_feed_start] = 1
-	end
+    def blog_posts_feed(batch_size)
 
-	
+	@blog_posts_feed = []
+
 	# IF the user IS logged in
 	if logged_in?
 		# What to do
@@ -37,7 +41,13 @@ module BlogPostsFeedHelper
 	else
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		Blog.includes(:user, image_attachment: :blob).in_batches(of: 100, start: session[:blog_post_feed_start])
+		
+		blog_post_feed_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
+		blog_post_feed_batches.each do | batch |
+			@blog_posts_feed << batch
+		end
+
+		return @blog_posts_feed
 	end
     end
 	
