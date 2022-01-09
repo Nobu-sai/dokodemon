@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def home
-    
+    blog_posts_batches = blog_posts_feed 
+    blog_post
     @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
     
     if logged_in?

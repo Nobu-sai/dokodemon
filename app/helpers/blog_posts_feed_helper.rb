@@ -18,7 +18,7 @@ module BlogPostsFeedHelper
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
     def blog_posts_feed
 
-	@blog_posts_feed = []
+	@blog_posts_batches = []
 	batch_size = 1000
 
 	# IF the user IS logged in
@@ -48,7 +48,7 @@ module BlogPostsFeedHelper
 			@blog_posts_feed << batch
 		end
 
-		return @blog_posts_feed
+		return @blog_posts_batches
 	end
     end
 	
