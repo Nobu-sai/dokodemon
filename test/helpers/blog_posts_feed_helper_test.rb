@@ -16,10 +16,9 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
     
     # Fetch the Blot Posts Feed 
       # => Expect the Feed includes ALL Blog Table Records
-      batch_size = 100       
       all_blog_posts = []
 
-      blog_posts_feed(batch_size).each do | batch |
+      blog_posts_feed.each do | batch |
         batch.each do | post |
           all_blog_posts << post 
         end
