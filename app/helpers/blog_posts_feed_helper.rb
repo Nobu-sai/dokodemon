@@ -43,13 +43,13 @@ module BlogPostsFeedHelper
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
 		
-		 blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
-		# @blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size).first		
-		blog_posts_batches.each do | batch |
-			@blog_posts_batches << batch
-		end
+		#  blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
+		@blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size).first		
+		# blog_posts_batches.each do | batch |
+		# 	@blog_posts_batches << batch
+		# end
 		
-		return @blog_posts_batches
+		# return @blog_posts_batches
 	end
     end
 	
