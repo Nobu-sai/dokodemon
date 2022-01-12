@@ -4,10 +4,7 @@
 	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
 
 <% if @blog_posts_feed.count > 0 %>
-  <% puts "### app/views/shared/_blog_posts_feed.html.erb" %> 
-  <% puts "@blog_posts_feed #{@blog_posts_feed}" %>   
-  <% puts "@blog_posts_feed.count #{@blog_posts_feed.count}" %>   
-
+  <% puts "### app/views/shared/_blog_posts_feed.html.erb" %>   
   
   <% @blog_posts_feed.each do | post | %>
        
@@ -26,8 +23,7 @@
 
   <div>
     <% for i in 0..@total_batches do %>
-      <% puts "@total_batches #{@total_batches}" %>
-      <%= link_to "#{i + 1}", controller: session[:current_controller], action: session[:current_action], clicked_page: "#{i}" %>    
+      <%= link_to "#{i + 1}", controller: session[:current_controller], action: session[:current_action], clicked_page: "#{i + 1}" %>    
     <% end %>
   </div>
 

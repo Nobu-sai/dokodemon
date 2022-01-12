@@ -20,10 +20,18 @@ module BlogPostsFeedHelper
 
 	@blog_posts_batches = []
 	batch_size = 100
-	@total_batches = Blog.count / batch_size 
+	@total_batches = (Blog.count / batch_size) 
+	(Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
+      	puts "Blog.count #{Blog.count}"
+      	puts "Blog.count / batch_size #{Blog.count / batch_size}"
+	puts "Blog.count - (Blog.count / batch_size) * batch_size) #{Blog.count - (Blog.count / batch_size) * batch_size}"
+      	puts "@total_batches #{@total_batches}"
 
+	# session[:batch_number] = 0 
 
-	if session[:batch_number]
+	if !session[:batch_number]
+		session[:batch_number] = 0 
+	else
 		# Conditional for next or previous 
 			# - In the View 
 		if direction == "next"	
@@ -31,11 +39,11 @@ module BlogPostsFeedHelper
 		elsif direction == "previous" 
 			session[:batch_number] -= 1 
 		elsif clicked_page 
-			session[:batch_number] = clicked_page.to_i 
+			puts "clicked_page #{clicked_page}"
+			session[:batch_number] = clicked_page.to_i - 1
 		end					
 		
-	elsif
-		session[:batch_number] = 0 
+	
 	end
 	
 
@@ -68,8 +76,6 @@ module BlogPostsFeedHelper
 		end
 		
 		# return @blog_posts_batches
-		puts "@blog_posts_batches[0][0] #{@blog_posts_batches[0][0]}"
-		puts "@blog_posts_batches[session[:batch_number]] #{@blog_posts_batches[session[:batch_number]]}"
 		return @blog_posts_batches[session[:batch_number]]
 	end
     end
