@@ -26,9 +26,21 @@ class StaticPagesController < ApplicationController
       # puts "batch.second #{batch.second.count}"
         # => NoMethodError (undefined method `count' for #<Blog:0x00007fee78324718>):
       puts "batch[0] #{batch[0]}"
-      @blog_posts_feed = batch.paginate(page: params[:page])
+      # @blog_posts_feed = batch.paginate(page: params[:page])
+
+      @blog_posts_feed = []
+      
+      batch.each do | post | 
+        @blog_posts_feed << post
+        puts "post #{post}" 
+
+      end 
+      
+      puts "@blog_posts_feed (added posts directly) count #{@blog_posts_feed.count}"
+      @blog_posts_feed.paginate(page: params[:page])
 
     end
+
     
     if logged_in?
       @blog  = current_user.blogs.build      
