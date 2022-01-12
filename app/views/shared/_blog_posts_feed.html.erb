@@ -3,26 +3,24 @@
     # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
 	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
 
-<% if @blog_posts_batches.any? %>
+<% if @blog_posts_feed.any? %>
   <% puts "### app/helpers/blog_posts_feed_helper" %> 
   
-  <% @blog_posts_batches.each do | batch | %>
-    <% puts "batch #{batch}" %>
-    <% puts "batch.count #{batch.count}" %>
-
+  <% @blog_posts_feed.each do | post | %>
+       
     <ol class="blogs">      
-      <%= render batch %>
+      <%= render post %>
     </ol>  
-    
-    <%= will_paginate batch.paginate(page: params[:page]),
-      :params => {:controller => session[:current_controller], :action => session[:current_action] }
-      # => Setting Link URL (a Tag href Value) with CURRENT URL | Controller Action(where the Pagination Link is Rendered) 
-      # =>> Link in the FIXED page regardless the REAL Controller Action (Request Sent) FLEXIBILY 
-      # P
-      # - Prevent Linking to UNEXPECTED page (Ex: Another Controller Action View File after Failed Submission to a Model)
-        # - evernote:///view/180370944/s350/8e940c01-e0ca-9522-5f08-87ab3746f3a1/77812575-71c1-4561-9362-9c31a7a32180
-        # - evernote:///view/180370944/s350/708a5c0a-1a85-f1af-2974-99604629c77c/77812575-71c1-4561-9362-9c31a7a32180
-        # - Rails Tutorial
-    %>
+    <% puts "session[:current_controller] #{session[:current_controller]}"%>
+  
   <% end %>
+
+  <div>
+    <%= link_to "Previous", controller: session[:current_controller], action: session[:current_action], direction: "previous" %>    
+  </div>
+
+  <div>
+    <%= link_to "Next", controller: session[:current_controller], action: session[:current_action], direction: "next" %>  
+  </div>
+
 <% end %>
