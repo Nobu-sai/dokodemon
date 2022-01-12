@@ -3,24 +3,31 @@
     # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
 	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
 
-<% if @blog_posts_feed.any? %>
-  <% puts "### app/helpers/blog_posts_feed_helper" %> 
+<% if @blog_posts_feed.count > 0 %>
+  <% puts "### app/views/shared/_blog_posts_feed.html.erb" %> 
+  <% puts "@blog_posts_feed #{@blog_posts_feed}" %>   
+  <% puts "@blog_posts_feed.count #{@blog_posts_feed.count}" %>   
+
   
   <% @blog_posts_feed.each do | post | %>
        
     <ol class="blogs">      
       <%= render post %>
-    </ol>  
-    <% puts "session[:current_controller] #{session[:current_controller]}"%>
+    </ol>      
   
   <% end %>
 
+
   <div>
-    <%= link_to "Previous", controller: session[:current_controller], action: session[:current_action], direction: "previous" %>    
+    <% if session[:batch_number] > 0 %>
+      <%= link_to "Previous", controller: session[:current_controller], action: session[:current_action], direction: "previous" %>    
+    <% end %>
   </div>
 
   <div>
+    <% if session[:batch_number] <= @total_batches %>
     <%= link_to "Next", controller: session[:current_controller], action: session[:current_action], direction: "next" %>  
+    <% end %>
   </div>
 
 <% end %>

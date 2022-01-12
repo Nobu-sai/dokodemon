@@ -20,19 +20,21 @@ module BlogPostsFeedHelper
 
 	@blog_posts_batches = []
 	batch_size = 100
-	total_batches = Blog.count / batch_size 
+	@total_batches = Blog.count / batch_size 
 
-	if session[:batch_number] && session[:batch_number] <= total_batches
-		if direction == "next"
-			session[:batch_number] += 1
-		elsif direction == "previous"
-			sesssion[:batch_number] -= 1
+	session[:batch_number] = 0 
+	if session[:batch_number]
+		# Conditional for next or previous 
+			# - In the View 
+		if direction == "next"		
+			session[:batch_number] += 1		
+		elsif direction == "previous" 
+			session[:batch_number] -= 1
 		end
-	elsif (session[:batch_number] && session[:batch_number] = total_batches) 
-		return 
-	else 
-		session[:batch_number] = 0
+		
+		
 	end
+	
 
 
 	# IF the user IS logged in
@@ -63,7 +65,9 @@ module BlogPostsFeedHelper
 		end
 		
 		# return @blog_posts_batches
-		return @blog_post_feed = @blog_posts_batches[session[:batch_number]]
+		puts "@blog_posts_batches[0][0] #{@blog_posts_batches[0][0]}"
+		puts "@blog_posts_batches[session[:batch_number]] #{@blog_posts_batches[session[:batch_number]]}"
+		return @blog_posts_batches[session[:batch_number]]
 	end
     end
 	
