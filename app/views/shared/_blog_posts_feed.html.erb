@@ -25,8 +25,15 @@
   </div>
 
   <div>
+    <% for i in 0..@total_batches do %>
+      <% puts "@total_batches #{@total_batches}" %>
+      <%= link_to "#{i + 1}", controller: session[:current_controller], action: session[:current_action], clicked_page: "#{i}" %>    
+    <% end %>
+  </div>
+
+  <div>
     <% if session[:batch_number] <= @total_batches %>
-    <%= link_to "Next", controller: session[:current_controller], action: session[:current_action], direction: "next" %>  
+      <%= link_to "Next", controller: session[:current_controller], action: session[:current_action], direction: "next" %>  
     <% end %>
   </div>
 

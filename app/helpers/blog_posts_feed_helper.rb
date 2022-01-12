@@ -16,23 +16,26 @@ module BlogPostsFeedHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def blog_posts_feed(direction)
+    def fetch_blog_posts_as_a_batch(direction, clicked_page)
 
 	@blog_posts_batches = []
 	batch_size = 100
 	@total_batches = Blog.count / batch_size 
 
-	session[:batch_number] = 0 
+
 	if session[:batch_number]
 		# Conditional for next or previous 
 			# - In the View 
-		if direction == "next"		
-			session[:batch_number] += 1		
+		if direction == "next"	
+			session[:batch_number] += 1 
 		elsif direction == "previous" 
-			session[:batch_number] -= 1
-		end
+			session[:batch_number] -= 1 
+		elsif clicked_page 
+			session[:batch_number] = clicked_page.to_i 
+		end					
 		
-		
+	elsif
+		session[:batch_number] = 0 
 	end
 	
 
@@ -70,5 +73,5 @@ module BlogPostsFeedHelper
 		return @blog_posts_batches[session[:batch_number]]
 	end
     end
-	
+
 end
