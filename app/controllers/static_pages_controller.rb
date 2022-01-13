@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
-    track_batch_number_session(params[:direction], params[:clicked_page] ? params[:clicked_page] : false)
+    track_batch_number_session(params[:direction], params[:clicked_page])
     @blog_posts_feed = fetch_blog_posts_as_a_batch()       
     
     if logged_in?
