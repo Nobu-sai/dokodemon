@@ -2,9 +2,10 @@
 
 require "test_helper"
 
-class BlogPostsFeedHelperTest < ActionView::TestCase
-  include BlogPostsFeedHelper
+class BlogPostsFeedTest < ActionView::TestCase
+  include FetchBlogPostsHelper
   include SessionTrackBatchNumberHelper
+  include SessionDefineBatchSizeHelper 
   include CalculateTotalBatchesHelper
 
  
@@ -20,18 +21,19 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
     # Fetch the Blot Posts Feed 
       # => Expect the Feed includes ALL Blog Table Records
       all_blog_posts = []
-
-      batch_size = 100
-      @total_batches = Blog.count / batch_size
-      (Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
-      for i in 1..@total_batches do
+      
+      define_batch_size
+      @total_batches = calculate_total_batches
+      
+      for i in 0..@total_batches -1 do
         track_batch_number("next")
         @blog_posts_batch = fetch_blog_posts_as_a_batch
         @blog_posts_batch.each do | post |
           all_blog_posts << post           
         end
       end
-
+      
+      assert Blog.all.count == all_blog_posts.count
       
       Blog.all.each do | blog_post |             
         assert all_blog_posts.include?(blog_post)    

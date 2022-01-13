@@ -11,7 +11,7 @@
 # - Send Batch size 
 # - Loop over the Array -> Show | Edit 
 
-module BlogPostsFeedHelper
+module FetchBlogPostsHelper
 	include SessionsHelper
 	include SessionTrackBatchNumberHelper
 	

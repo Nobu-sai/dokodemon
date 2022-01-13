@@ -2,7 +2,7 @@
 # For users/_user.html.erb
 # Check the Blog Posts in test/fixtures/blogs.yml. 
 require 'test_helper'
-include BlogPostsFeedHelper
+include FetchBlogPostsHelper
 include UrlEncodingHelper
 
 class UserShowTest < ActionDispatch::IntegrationTest
