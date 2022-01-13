@@ -4,6 +4,9 @@ require "test_helper"
 
 class BlogPostsFeedHelperTest < ActionView::TestCase
   include BlogPostsFeedHelper
+  include SessionTrackBatchNumberHelper
+  include CalculateTotalBatchesHelper
+
  
   def setup
     @michael = users(:michael) 
@@ -22,7 +25,7 @@ class BlogPostsFeedHelperTest < ActionView::TestCase
       @total_batches = Blog.count / batch_size
       (Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
       for i in 1..@total_batches do
-        track_batch_number_session("next")
+        track_batch_number("next")
         @blog_posts_batch = fetch_blog_posts_as_a_batch
         @blog_posts_batch.each do | post |
           all_blog_posts << post           
