@@ -28,12 +28,12 @@
     </div>
 
     <div>
-      <% if session[:batch_number] <= @total_batches %>
+      <% if session[:batch_number] < @total_batches -1 %>        
         <%= link_to "Next", controller: session[:current_controller], action: session[:current_action], direction: "next" %>  
       <% end %>
     </div>
     
-    
+
   </div>
 
 <% end %>
