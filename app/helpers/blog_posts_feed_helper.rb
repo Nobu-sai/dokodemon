@@ -49,31 +49,8 @@ module BlogPostsFeedHelper
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
-		puts "@blog_posts_batches[3].count as the LAST page #{@blog_posts_batches[3].count}"
-		puts "@blog_posts_batches.count #{@blog_posts_batches.count}"
-		puts "Blog.count #{Blog.count}"
 		return @blog_posts_batches[session[:batch_number]]
 	end
     end
 
-    def track_batch_number_session(direction = nil, clicked_page = nil) 
-    
-	
-	if !session[:batch_number]
-		session[:batch_number] = 0 
-	else
-		# Conditional for next or previous 
-			# - In the View 
-		if direction == "next"	
-			session[:batch_number] += 1 
-		elsif direction == "previous" 
-			session[:batch_number] -= 1 
-		elsif clicked_page 
-			puts "clicked_page #{clicked_page}"
-			session[:batch_number] = clicked_page.to_i - 1
-		end					
-			
-	end
-	
-	end
 end

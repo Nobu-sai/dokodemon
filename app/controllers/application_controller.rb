@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include SessionStoreCurrentPathHelper
+  include SessionTrackBatchNumber
   include BlogPostsFeedHelper
   before_action :track_page_path
   
