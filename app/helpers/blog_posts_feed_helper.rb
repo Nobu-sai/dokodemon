@@ -13,15 +13,13 @@
 
 module BlogPostsFeedHelper
 	include SessionsHelper
+	include SessionTrackBatchNumberHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
     def fetch_blog_posts_as_a_batch
 
 	@blog_posts_batches = []
-	batch_size = 100
-	@total_batches = Blog.count / batch_size
-	(Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
 
 	# IF the user IS logged in
 	if logged_in?
@@ -45,7 +43,7 @@ module BlogPostsFeedHelper
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
 		
-		 blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
+		blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: session[:batch_size])		
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
