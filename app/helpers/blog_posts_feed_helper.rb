@@ -20,14 +20,9 @@ module BlogPostsFeedHelper
 
 	@blog_posts_batches = []
 	batch_size = 100
-	@total_batches = (Blog.count / batch_size) 
+	@total_batches = Blog.count / batch_size
 	(Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
-      	puts "Blog.count #{Blog.count}"
-      	puts "Blog.count / batch_size #{Blog.count / batch_size}"
-	puts "Blog.count - (Blog.count / batch_size) * batch_size) #{Blog.count - (Blog.count / batch_size) * batch_size}"
-      	puts "@total_batches #{@total_batches}"
 
-	# session[:batch_number] = 0 
 
 	if !session[:batch_number]
 		session[:batch_number] = 0 
@@ -75,7 +70,6 @@ module BlogPostsFeedHelper
 			@blog_posts_batches << batch
 		end
 		
-		# return @blog_posts_batches
 		return @blog_posts_batches[session[:batch_number]]
 	end
     end
