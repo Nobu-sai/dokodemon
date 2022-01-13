@@ -16,6 +16,7 @@ module SessionTrackBatchNumberHelper
 			session[:batch_number] += 1 
 		elsif direction == "previous" 
 			session[:batch_number] -= 1 
+			
 		elsif clicked_page 
 			puts "clicked_page #{clicked_page}"
 			session[:batch_number] = clicked_page.to_i - 1
