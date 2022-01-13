@@ -16,32 +16,12 @@ module BlogPostsFeedHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def fetch_blog_posts_as_a_batch(direction, clicked_page)
+    def fetch_blog_posts_as_a_batch
 
 	@blog_posts_batches = []
 	batch_size = 100
 	@total_batches = Blog.count / batch_size
 	(Blog.count - (Blog.count / batch_size) * batch_size) > 0 ? @total_batches += 1 : return 
-
-
-	if !session[:batch_number]
-		session[:batch_number] = 0 
-	else
-		# Conditional for next or previous 
-			# - In the View 
-		if direction == "next"	
-			session[:batch_number] += 1 
-		elsif direction == "previous" 
-			session[:batch_number] -= 1 
-		elsif clicked_page 
-			puts "clicked_page #{clicked_page}"
-			session[:batch_number] = clicked_page.to_i - 1
-		end					
-		
-	
-	end
-	
-
 
 	# IF the user IS logged in
 	if logged_in?
@@ -74,4 +54,24 @@ module BlogPostsFeedHelper
 	end
     end
 
+    def track_batch_number_session(direction = nil, clicked_page = nil) 
+    
+	
+	if !session[:batch_number]
+		session[:batch_number] = 0 
+	else
+		# Conditional for next or previous 
+			# - In the View 
+		if direction == "next"	
+			session[:batch_number] += 1 
+		elsif direction == "previous" 
+			session[:batch_number] -= 1 
+		elsif clicked_page 
+			puts "clicked_page #{clicked_page}"
+			session[:batch_number] = clicked_page.to_i - 1
+		end					
+			
+	end
+	
+	end
 end
