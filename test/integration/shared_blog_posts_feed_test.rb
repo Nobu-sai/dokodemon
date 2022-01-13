@@ -16,7 +16,6 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
   test "Should HAVE" do
     log_in_as(@user)
     get root_path
-    assert_select 'div.pagination' 
 
     # Should HAVE Links to each Blog Post Page.
       assert_select 'a', text: @blog.title

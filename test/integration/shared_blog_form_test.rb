@@ -10,7 +10,6 @@ class SharedBlogFormTest < ActionDispatch::IntegrationTest
   test "SHOULD have" do
     log_in_as(@user)
     get root_path
-    assert_select 'div.pagination'
     
     # Form Inputs
       assert_select 'input[type=text]'

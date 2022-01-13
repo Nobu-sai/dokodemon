@@ -1,4 +1,9 @@
 class BlogsController < ApplicationController
+  include SessionTrackBatchNumberHelper 
+  include CalculateTotalBatchesHelper
+  include SessionDefineBatchSizeHelper 
+  include CalculateTotalBatchesHelper
+
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
@@ -20,9 +25,13 @@ class BlogsController < ApplicationController
           # - String Path can NOT be used
       else      
 
-        @blog_posts_feed = blog_posts_feed.paginate(page: params[:page])
-          # P
-          # - On failed submission        
+        define_batch_size
+        track_batch_number(params[:direction], params[:clicked_page])
+        @total_batches = calculate_total_batches
+        @blog_posts_feed = fetch_blog_posts_as_a_batch      
+          # - Feed is retuired 
+            # P
+              # - On failed submission        
         format.html { render "#{session[:string_path]}", status: 400 }       
  
       end

@@ -44,7 +44,10 @@ class BlogPostsFeedTest < ActionView::TestCase
   test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
     current_user = @michael
     log_in_as(current_user)
-	  @blog_posts_feed = blog_posts_feed 
+
+
+    track_batch_number
+	  @blog_posts_feed = fetch_blog_posts_as_a_batch
 
     # Blog Posts by the users the Current User is FOLLOWING => Should BE included. 
       @blog_posts_feed.include?(@lana)
