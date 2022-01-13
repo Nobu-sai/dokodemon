@@ -22,7 +22,7 @@
     </div>
 
     <div>
-      <% for i in 0..@total_batches do %>
+      <% for i in 0..@total_batches -1 do %>
         <%= link_to "#{i + 1}", controller: session[:current_controller], action: session[:current_action], clicked_page: "#{i + 1}" %>    
       <% end %>
     </div>

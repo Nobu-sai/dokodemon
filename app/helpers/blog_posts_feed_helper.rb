@@ -49,7 +49,9 @@ module BlogPostsFeedHelper
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
-		
+		puts "@blog_posts_batches[3].count as the LAST page #{@blog_posts_batches[3].count}"
+		puts "@blog_posts_batches.count #{@blog_posts_batches.count}"
+		puts "Blog.count #{Blog.count}"
 		return @blog_posts_batches[session[:batch_number]]
 	end
     end
