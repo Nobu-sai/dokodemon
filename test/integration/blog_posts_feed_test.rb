@@ -45,7 +45,6 @@ class BlogPostsFeedTest < ActionView::TestCase
     current_user = @michael
     log_in_as(current_user)
 
-
     track_batch_number
 	  @blog_posts_feed = fetch_blog_posts_as_a_batch
 
