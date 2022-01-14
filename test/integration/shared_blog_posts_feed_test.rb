@@ -32,18 +32,19 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
       end
 
       # Each Feed Button
-      define_batch_size
-      @total_batches = calculate_total_batches
-      @feed_button_amount = @total_batches + 1
-        # One for each batch + Next
-      assert_select 'a.feed-button', count: @feed_button_amount
+        # First page 
+          define_batch_size
+          @total_batches = calculate_total_batches
+          @feed_button_amount = @total_batches + 1
+            # One for each batch + Next
+          assert_select 'a.feed-button', count: @feed_button_amount
+        # Second page
+          get root_path(:params => { :clicked_page => "2" })
+          @feed_button_amount = @total_batches + 2
+            # One for each batch + Next + Previous 
 
-      get root_path(:params => { :clicked_page => "2" })
-      @feed_button_amount = @total_batches + 2
-        # One for each batch + Next + Previous 
-
-      assert_select 'a.feed-button', count: @feed_button_amount
-      
+          assert_select 'a.feed-button', count: @feed_button_amount
+        
     
   end  
 
