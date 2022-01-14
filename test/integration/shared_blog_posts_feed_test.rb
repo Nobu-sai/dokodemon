@@ -33,6 +33,7 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
 
       # Each Feed Button
         # First page 
+        
           define_batch_size
           @total_batches = calculate_total_batches
           @feed_button_amount = @total_batches + 1
