@@ -17,12 +17,13 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get root_path
 
-    # Should HAVE Links to each Blog Post Page.
+    # Links to each Blog Post Page.
       assert_select 'a', text: @blog.title
         # Should be actual Blog Title.
 
-    # Should HAVE Links to delete OWN Blog Posts.
+    # Links to delete OWN Blog Posts.
       assert_select 'a', text: 'Delete'  
+    
     
   end  
 
