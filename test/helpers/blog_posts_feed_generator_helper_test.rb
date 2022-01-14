@@ -46,7 +46,7 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
     log_in_as(current_user)
     assert is_logged_in? 
 
-    define_batch_size
+    define_batch_size(100)
     track_batch_number
 	  @blog_posts_feed = fetch_blog_posts_as_a_batch
 
