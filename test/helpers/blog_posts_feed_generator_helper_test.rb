@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class BlogPostsFeedHelperTest < ActionView::TestCase
+class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
   include FetchBlogPostsHelper
   include SessionTrackBatchNumberHelper
   include SessionDefineBatchSizeHelper 
