@@ -3,7 +3,7 @@ module SessionDefineBatchSizeHelper
 		if batch_size
 			session[:total_batches] = batch_size
 		else
-			session[:batch_size] = 100
+			session[:batch_size] = 1000
 		end	
 	end
 end

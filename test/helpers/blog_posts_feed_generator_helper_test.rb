@@ -22,7 +22,7 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
       # => Expect the Feed includes ALL Blog Table Records
       all_blog_posts = []
       
-      define_batch_size
+      define_batch_size(100)
       @total_batches = calculate_total_batches
       
       for i in 0..@total_batches -1 do
