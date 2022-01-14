@@ -44,7 +44,9 @@ class BlogPostsFeedTest < ActionView::TestCase
   test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
     current_user = @michael
     log_in_as(current_user)
+    assert is_logged_in? 
 
+    define_batch_size
     track_batch_number
 	  @blog_posts_feed = fetch_blog_posts_as_a_batch
 
