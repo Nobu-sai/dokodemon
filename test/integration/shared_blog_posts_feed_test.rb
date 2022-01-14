@@ -4,6 +4,8 @@
 require 'test_helper'
 
 class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
+  include CalculateTotalBatchesHelper
+  include SessionDefineBatchSizeHelper 
 
   def setup
     @user = users(:michael)
@@ -24,6 +26,24 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
     # Links to delete OWN Blog Posts.
       assert_select 'a', text: 'Delete'  
     
+    # Button for Feed Page or Batch Number 
+      assert_select 'a', class: "feed-button__container" do
+        assert_select 'a.feed-button'      
+      end
+
+      # Each Feed Button
+      define_batch_size
+      @total_batches = calculate_total_batches
+      @feed_button_amount = @total_batches + 1
+        # One for each batch + Next
+      assert_select 'a.feed-button', count: @feed_button_amount
+
+      get root_path(:params => { :clicked_page => "2" })
+      @feed_button_amount = @total_batches + 2
+        # One for each batch + Next + Previous 
+
+      assert_select 'a.feed-button', count: @feed_button_amount
+      
     
   end  
 
