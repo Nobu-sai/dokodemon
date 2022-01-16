@@ -4,7 +4,8 @@
 require 'test_helper'
 
 class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
-  include CalculateTotalBatchesHelper
+  
+
 
   def setup
     @user = users(:michael)
