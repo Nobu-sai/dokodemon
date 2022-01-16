@@ -13,12 +13,14 @@
 
 module FetchBlogPostsHelper
 	include SessionsHelper
+  	include SessionDefineBatchSizeHelper 
 	include SessionTrackBatchNumberHelper
 	
   # Fetch the right Blog Posts 
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
-    def fetch_blog_posts_as_a_batch
-
+    def fetch_blog_posts_as_a_batch(direction, clicked_page, batch_size)
+	# define_batch_size(batch_size)
+	track_batch_number(direction, clicked_page, batch_size)
 	@blog_posts_batches = []
 
 	# IF the user IS logged in

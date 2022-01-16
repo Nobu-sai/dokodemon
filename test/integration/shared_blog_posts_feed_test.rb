@@ -5,7 +5,6 @@ require 'test_helper'
 
 class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
   include CalculateTotalBatchesHelper
-  include SessionDefineBatchSizeHelper 
 
   def setup
     @user = users(:michael)
@@ -33,14 +32,14 @@ class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
 
       # Each Feed Button
         # First page 
-        
-          define_batch_size
-          @total_batches = calculate_total_batches
+          # fetch_blog_posts_as_a_batch(nil, nil, "100") 
+          # define_batch_size
+          # @total_batches = calculate_total_batches(100)
           @feed_button_amount = @total_batches + 1
             # One for each batch + Next
           assert_select 'a.feed-button', count: @feed_button_amount
         # Second page
-          get root_path(:params => { :clicked_page => "2" })
+          get root_path(params: { clicked_page: "2" })
           @feed_button_amount = @total_batches + 2
             # One for each batch + Next + Previous 
 
