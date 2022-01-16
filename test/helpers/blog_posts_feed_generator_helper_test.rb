@@ -5,7 +5,6 @@ require "test_helper"
 class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
   include FetchBlogPostsHelper
   include SessionTrackBatchNumberHelper
-  include SessionDefineBatchSizeHelper 
   include CalculateTotalBatchesHelper
 
  
