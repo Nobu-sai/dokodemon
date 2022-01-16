@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   include CalculateTotalBatchesHelper
-  include CalculateTotalBatchesHelper
 
   def home    
     batch_size = 100
