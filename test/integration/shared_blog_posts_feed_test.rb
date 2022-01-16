@@ -4,7 +4,7 @@
 require 'test_helper'
 
 class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
-  
+include UrlEncodingHelper 
 
 
   def setup
