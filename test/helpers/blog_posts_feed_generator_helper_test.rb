@@ -46,19 +46,19 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
 	  @blog_posts_batch = fetch_blog_posts_as_a_batch(nil, nil, 100)
 
     # Blog Posts by the users the Current User is FOLLOWING => Should BE included. 
-      @blog_posts_feed.include?(@lana)
+      @blog_posts_batch.include?(@lana)
 
     # Self-posts for user WITH followers => Should BE included. 
-      @blog_posts_feed.include?(current_user)
+      @blog_posts_batch.include?(current_user)
       
     current_user = @archer
     log_in_as(current_user)    
     
     # Self-posts for user WITHOUT followers => Should BE included.
-      @blog_posts_feed.include?(current_user)
+      @blog_posts_batch.include?(current_user)
 
     # Blog Posts from the user the Current User is NOT following => A Blog Post by michael should NOT be included.
-      @blog_posts_feed.include?(@michael)
+      @blog_posts_batch.include?(@michael)
 
   end
 end
