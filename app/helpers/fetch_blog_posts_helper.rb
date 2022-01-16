@@ -13,7 +13,6 @@
 
 module FetchBlogPostsHelper
 	include SessionsHelper
-  	include SessionDefineBatchSizeHelper 
 	include SessionTrackBatchNumberHelper
 	
   # Fetch the right Blog Posts 
@@ -45,7 +44,7 @@ module FetchBlogPostsHelper
 		# What to do
 		# - Show ALL Blog Posts in reverse chronological order (latest at top)
 		
-		blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: session[:batch_size])		
+		blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
