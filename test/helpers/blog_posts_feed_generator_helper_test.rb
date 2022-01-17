@@ -24,7 +24,7 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
       total_batches = calculate_total_batches(100)
       
       for i in 0..total_batches -1 do        
-        @blog_posts_batch = fetch_blog_posts_as_a_batch("next", 100)
+        @blog_posts_batch = fetch_blog_posts_as_a_batch("next", batch_size: 100)
         # @blog_posts_batch = fetch_blog_posts_as_a_batch("next", batch_size: 100)
         @blog_posts_batch.each do | post |
           all_blog_posts << post           

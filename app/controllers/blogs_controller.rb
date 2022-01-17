@@ -25,7 +25,7 @@ class BlogsController < ApplicationController
       else      
 
         batch_size = 100
-        @blog_posts_feed = fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size)      
+        @blog_posts_feed = fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size: batch_size)      
           # - Feed is retuired 
             # P
               # - On failed submission        
