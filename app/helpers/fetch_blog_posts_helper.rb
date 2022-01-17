@@ -19,27 +19,6 @@ module FetchBlogPostsHelper
   # => Becomes the Array of Blog Posts diaplayed in the a proto-feed View (app/views/shared/_blog_posts_feed.html.erb).      
 #     def fetch_blog_posts_as_a_batch(direction = nil, clicked_page = nil, batch_size:)
 
-	# Variable Parameters & Keyword Parameters
-	#     def fetch_blog_posts_as_a_batch(*direction, *clicked_page, batch_size:)
-		# =>  syntax error, unexpected tLABEL
-	#     def fetch_blog_posts_as_a_batch(*direction, *clicked_page, batch_size:);
-		# => syntax error, unexpected tLABEL
-		# def fetch_blog_posts_as_a_batch(batch_size:, *direction, *clicked_page);
-		# => syntax error, unexpected *
-		# def fetch_blog_posts_as_a_batch(batch_size: 100, *direction, *clicked_page);
-		# => syntax error, unexpected *
-		# def fetch_blog_posts_as_a_batch(*direction, *clicked_page, batch_size: 100);
-		# =>  syntax error, unexpected tLABEL
-		# def fetch_blog_posts_as_a_batch(*direction, *clicked_page, batch_size: 100)
-		# =>  syntax error, unexpected tLABEL
-		# def fetch_blog_posts_as_a_batch(batch_size = 100, *direction, *clicked_page)
-		# => syntax error, unexpected * 
-		# def fetch_blog_posts_as_a_batch(**batch_size, *direction, *clicked_page)
-		# => syntax error, unexpected *
-		# def fetch_blog_posts_as_a_batch(**batch_size, **direction, **clicked_page)
-		# =>  syntax error, unexpected **arg, expecting & or '&' 
-		
-
 	track_batch_number(direction, clicked_page, batch_size)
 	@blog_posts_batches = []
 
