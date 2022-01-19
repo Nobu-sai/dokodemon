@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include SessionStoreCurrentPathHelper
-  include FetchBlogPostsHelper
+  
   before_action :track_page_path
   
   private  
