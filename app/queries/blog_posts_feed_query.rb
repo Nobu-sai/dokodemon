@@ -13,11 +13,11 @@
 
 require_relative 'application_query'
 
-class FetchBlogsPostsFeedQuery < ApplicationQuery
-	
+class BlogPostsFeedQuery < ApplicationQuery
 	include SessionsHelper
 	include SessionTrackBatchNumberHelper
 	include CalculateTotalBatchesHelper
+
 	
 	def initialize(blogs = Blog.all)
 		@blogs = blogs
