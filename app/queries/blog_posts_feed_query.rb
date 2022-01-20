@@ -13,7 +13,7 @@
 
 require_relative 'application_query'
 
-class FetchBlogPostsFeedQuery < ApplicationQuery
+class FetchBlogsPostsFeedQuery < ApplicationQuery
 	include SessionsHelper
 	include SessionTrackBatchNumberHelper
 	include CalculateTotalBatchesHelper
