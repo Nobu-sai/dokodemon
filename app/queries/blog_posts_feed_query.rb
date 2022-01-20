@@ -18,13 +18,9 @@ class BlogPostsFeedQuery < ApplicationQuery
 	include SessionsHelper
 	include SessionTrackBatchNumberHelper
 	include CalculateTotalBatchesHelper
-
 	
 	def initialize(blogs = Blog.all, direction: nil, clicked_page: nil, batch_size: )
-		@blogs = blogs
-		@direction = direction
-		@clicked_page = clicked_page
-		@batch_size = batch_size
+		@blogs = blogs		
 	end
 
     def fetch_blog_posts_as_a_batch
