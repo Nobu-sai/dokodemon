@@ -14,19 +14,19 @@
 require_relative 'application_query'
 
 class BlogPostsFeedQuery < ApplicationQuery
-	
 	include SessionsHelper
 	include SessionTrackBatchNumberHelper
 	include CalculateTotalBatchesHelper
+
 	
-	def initialize(blogs = Blog.all, direction: nil, clicked_page: nil, batch_size: )
-		@blogs = blogs		
+	def initialize(blogs = Blog.all)
+		@blogs = blogs
 	end
 
-    def fetch_blog_posts_as_a_batch
-	
-	calculate_total_batches(@batch_size)
-	batch_number = track_batch_number(@direction, @clicked_page, batch_size: @batch_size)
+    def fetch_blog_posts_as_a_batch(direction = nil, clicked_page = nil, batch_size:)
+
+	calculate_total_batches(batch_size)
+	track_batch_number(direction, clicked_page, batch_size)
 	@blog_posts_batches = []
 
 	# IF the user IS logged in
@@ -55,7 +55,7 @@ class BlogPostsFeedQuery < ApplicationQuery
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
-		return @blog_posts_batches[batch_number]
+		return @blog_posts_batches[session[:batch_number]]
 	end
     end
 
