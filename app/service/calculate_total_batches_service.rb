@@ -1,5 +1,5 @@
 
-module CalculateTotalBatchesHelper
+module CalculateTotalBatchesService
 	
     def calculate_total_batches(batch_size)
 	# batch_size = session[:batch_size]

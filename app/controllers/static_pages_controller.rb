@@ -1,16 +1,12 @@
 
 class StaticPagesController < ApplicationController
-	include SessionTrackBatchNumberHelper
-
+  include SessionTrackBatchNumberService  
 
   def home    
     
     batch_size = 100
-    # @total_batches = calculate_total_batches(batch_size)
-    # @blog_posts_feed = fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size: batch_size) 
-    @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: batch_size, batch_number: get_batch_number(batch_size))
-    # @blog_posts_feed = FetchBlogPostsFeedQuery.new
-    # @blog_posts_feed.fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size: batch_size)
+   
+    @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: batch_size, batch_number: track_batch_number(params[:direction], params[:clicked_page], batch_size))
     
     if logged_in?
       @blog  = current_user.blogs.build      
@@ -27,10 +23,5 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
-  private 
-    def get_batch_number(batch_size)
-      batch_number = track_batch_number(params[:direction], params[:clicked_page], batch_size)
-    
-    end
 
 end
