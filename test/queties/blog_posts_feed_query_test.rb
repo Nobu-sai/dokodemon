@@ -1,9 +1,9 @@
 
-
 require "test_helper"
+require "blog_posts_feed_query"
 
-class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
-  include FetchBlogPostsHelper
+class BlogPostsFeedQueryTest < ActiveSupport::TestCase
+
   include SessionTrackBatchNumberHelper
   include CalculateTotalBatchesHelper
 
@@ -15,17 +15,16 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
   end
 
   test "NO login => Should show all posts" do
-    assert_not logged_in?      
     
     # Fetch the Blot Posts Feed 
       # => Expect the Feed includes ALL Blog Table Records
       all_blog_posts = []
         
-      total_batches = calculate_total_batches(100)
+      batch_size = 100
+      total_batches = calculate_total_batches(batch_size)
       
-      for i in 0..total_batches -1 do        
-        @blog_posts_batch = fetch_blog_posts_as_a_batch("next", batch_size: 100)
-        # @blog_posts_batch = fetch_blog_posts_as_a_batch("next", batch_size: 100)
+      for i in 0..total_batches -1 do       
+        @blog_posts_batch =  BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: nil , batch_number: i, batch_size: batch_size)
         @blog_posts_batch.each do | post |
           all_blog_posts << post           
         end
@@ -40,11 +39,10 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
   end
 
   test "A user LOGGED in & different FOLLOW Relationship => Should have the Blog Posts by right users" do      
-    current_user = @michael
-    log_in_as(current_user)
-    assert is_logged_in?     
+	batch_size = 100
+	current_user = @michael    
 
-	  @blog_posts_batch = fetch_blog_posts_as_a_batch(batch_size: 100)
+	  @blog_posts_batch =  BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_number: nil, batch_size: batch_size)
 
     # Blog Posts by the users the Current User is FOLLOWING => Should BE included. 
       @blog_posts_batch.include?(@lana)
@@ -52,9 +50,10 @@ class BlogPostsFeedGeneratorHelperTest < ActionView::TestCase
     # Self-posts for user WITH followers => Should BE included. 
       @blog_posts_batch.include?(current_user)
       
-    current_user = @archer
-    log_in_as(current_user)    
+      
+    current_user = @archer    
     
+    @blog_posts_batch =  BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_number: nil, batch_size: batch_size) 
     # Self-posts for user WITHOUT followers => Should BE included.
       @blog_posts_batch.include?(current_user)
 
