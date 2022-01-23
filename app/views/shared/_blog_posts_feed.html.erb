@@ -17,19 +17,19 @@
   <div class="feed-button__container" style="position: fixed; top: 20%; left: 5%; background-color: #333;">
     <div>
       <% if session[:batch_number] > 0 %>
-        <%= link_to "Previous", { controller: session[:current_controller], action: session[:current_action], direction: "previous" }, class: "feed-button" %>    
+        <%= link_to "Previous", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number("previous")}" }, class: "feed-button" %>    
       <% end %>
     </div>
 
     <div>
       <% for i in 0..@total_batches -1 do %>
-        <%= link_to "#{i + 1}", { controller: session[:current_controller], action: session[:current_action], clicked_page: "#{i + 1}"}, class: "feed-button" %>    
+        <%= link_to "#{i + 1}", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number(i + 1)}"}, class: "feed-button" %>    
       <% end %>
     </div>
 
     <div>
       <% if session[:batch_number] < @total_batches -1 %>        
-        <%= link_to "Next", { controller: session[:current_controller], action: session[:current_action], direction: "next" }, class: "feed-button" %>  
+        <%= link_to "Next", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number("next")}" }, class: "feed-button" %>  
       <% end %>
     </div>
     
