@@ -1,5 +1,7 @@
 
 module SessionTrackBatchNumberHelper
+	include CalculateTotalBatchesHelper
+
     def track_batch_number(direction = nil, clicked_page = nil, batch_size) 
     
 	total_batches = calculate_total_batches(batch_size)
