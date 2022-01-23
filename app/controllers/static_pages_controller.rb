@@ -5,9 +5,10 @@ class StaticPagesController < ApplicationController
 
   def home    
     
+    batch_size = 100
     # @total_batches = calculate_total_batches(batch_size)
     # @blog_posts_feed = fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size: batch_size) 
-    @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, logged_in: logged_in?, batch_number: get_batch_number)
+    @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: batch_size, batch_number: get_batch_number(batch_size))
     # @blog_posts_feed = FetchBlogPostsFeedQuery.new
     # @blog_posts_feed.fetch_blog_posts_as_a_batch(params[:direction], params[:clicked_page], batch_size: batch_size)
     
@@ -27,8 +28,7 @@ class StaticPagesController < ApplicationController
   end
 
   private 
-    def get_batch_number
-      batch_size = 100
+    def get_batch_number(batch_size)
       batch_number = track_batch_number(params[:direction], params[:clicked_page], batch_size)
     
     end

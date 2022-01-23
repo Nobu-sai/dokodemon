@@ -19,12 +19,12 @@ class BlogPostsFeedQuery < ApplicationQuery
 		@blogs = blogs
 	end
 
-    def fetch_blog_posts_as_a_batch(current_user:, batch_number: , logged_in: )
+    def fetch_blog_posts_as_a_batch(current_user:, batch_size: , batch_number:)
 		
 	@blog_posts_batches = []
 
 	# IF the user IS logged in
-	if logged_in
+	if current_user
 		# What to do
 		# - The posts for the users the OGGED IN user is FOLLOWING 
 		# - The posts for the LOGGED IN user ONESELF
@@ -43,9 +43,9 @@ class BlogPostsFeedQuery < ApplicationQuery
 	# IF the user is NOT logged in
 	else
 		# What to do
-		# - Show ALL Blog Posts in reverse chronological order (latest at top)
-		
-		blog_posts_batches = @blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
+		# - Show ALL Blog Posts in reverse chronological order (latest at top)		
+		# blog_posts_batches = @blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
+		blog_posts_batches = Blog.includes(:user, image_attachment: :blob).in_batches(of: batch_size)		
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
