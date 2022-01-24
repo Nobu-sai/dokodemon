@@ -5,7 +5,7 @@ module SessionTrackBatchNumberService
 	puts "batch_number #{batch_number}"
 
 	
-	if !session[:batch_number]
+	if !session[:batch_number] && batch_number == nil
 		puts "SessionTrackBatchNumberService/track_batch_number/!session[:batch_number] Case"
 		puts "session[:batch_number] #{session[:batch_number]}"
 		return session[:batch_number] = 0 

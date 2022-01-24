@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   def home    
     
     @batch_size = 100
+    puts "## app/controllers/static_pages_controller.rb"
     # batch_number = track_batch_number(params[:batch_number])
     puts "params[:batch_number] #{params[:batch_number]}"
     puts "session[:batch_number] #{session[:batch_number]}"
