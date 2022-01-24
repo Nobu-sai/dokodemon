@@ -16,20 +16,36 @@
 
   <div class="feed-button__container" style="position: fixed; top: 20%; left: 5%; background-color: #333;">
     <div>
-      <% if session[:batch_number] > 0 %>
-        <%= link_to "Previous", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number("previous")}" }, class: "feed-button" %>    
+      <% if calculate_batch_number(clicked_button: nil, batch_size: @batch_size) > 0 %>
+      <% debugger %>
+        <%= link_to "Previous", 
+        { 
+          controller: session[:current_controller], 
+          action: session[:current_action], 
+          batch_number: "#{calculate_batch_number(clicked_button: "previous", batch_size: @batch_size)}"
+        }, class: "feed-button" %>    
       <% end %>
     </div>
 
     <div>
-      <% for i in 0..@total_batches -1 do %>
-        <%= link_to "#{i + 1}", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number(i + 1)}"}, class: "feed-button" %>    
+      <% for i in 0..calculate_total_batches(@batch_size) -1 do %>
+        <%= link_to "#{i + 1}", 
+        { 
+          controller: session[:current_controller], 
+          action: session[:current_action], 
+          batch_number: "#{calculate_batch_number(clicked_button: "#{(i + 1).to_i}", batch_size: @batch_size)}"
+        }, class: "feed-button" %>    
       <% end %>
     </div>
 
     <div>
-      <% if session[:batch_number] < @total_batches -1 %>        
-        <%= link_to "Next", { controller: session[:current_controller], action: session[:current_action], batch_number: "#{calculate_batch_number("next")}" }, class: "feed-button" %>  
+      <% if session[:batch_number] < calculate_total_batches(@batch_size) -1 %>        
+        <%= link_to "Next", 
+        { 
+          controller: session[:current_controller], 
+          action: session[:current_action], 
+          batch_number: "#{calculate_batch_number(clicked_button: "next", batch_size: @batch_size)}" 
+        }, class: "feed-button" %>  
       <% end %>
     </div>
     

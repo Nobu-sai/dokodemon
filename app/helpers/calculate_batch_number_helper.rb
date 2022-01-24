@@ -3,7 +3,7 @@ module CalculateBatchNumberHelper
 	include CalculateTotalBatchesService
 
 	
-	def calculate_batch_number(clicked_button: )
+	def calculate_batch_number(clicked_button:, batch_size: )
 
 		total_batches = calculate_total_batches(batch_size)
 	
@@ -16,8 +16,10 @@ module CalculateBatchNumberHelper
 		elsif clicked_button == "previous" && session[:batch_number] > 0
 			session[:batch_number] -= 1 
 
-		else			
-			session[:batch_number] = clicked.to_i - 1
+		elsif clicked_button.is_a(Integer)			
+			session[:batch_number] = clicked_button - 1
+		else
+			session[:batch_number]
 		end					
 	end
 
