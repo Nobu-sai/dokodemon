@@ -16,13 +16,8 @@
 
   <div class="feed-button__container" style="position: fixed; top: 20%; left: 5%; background-color: #333;">
     <div>
-      <% puts "app/views/shared/_blog_posts_feed.html.erb" %>
-      <% puts "session[:batch_number]:  #{session[:batch_number]}" %>
-      <% puts "session[:batch_number].class:  #{session[:batch_number].class}" %>
  
       <% if session[:batch_number] > 0 %>
-        <% puts "session[:batch_number]:  #{session[:batch_number]}" %>
-        <% puts "session[:batch_number].class:  #{session[:batch_number].class}" %>
         <%= link_to "Previous", 
         { 
           controller: session[:current_controller], 
