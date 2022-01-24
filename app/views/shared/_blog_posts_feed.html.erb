@@ -20,7 +20,7 @@
       <% puts "session[:batch_number]:  #{session[:batch_number]}" %>
       <% puts "session[:batch_number].class:  #{session[:batch_number].class}" %>
  
-      <% if session[:batch_number] > 0 %>
+      <% if !session[:batch_number].class == "Nil" %>
         <% puts "session[:batch_number]:  #{session[:batch_number]}" %>
         <% puts "session[:batch_number].class:  #{session[:batch_number].class}" %>
         <%= link_to "Previous", 
