@@ -16,12 +16,14 @@ module CalculateBatchNumberHelper
 		elsif clicked_button == "previous" && session[:batch_number] > 0
 			session[:batch_number] -= 1 
 
-			
-		elsif clicked_button.is_a(Integer)			
+
+		elsif clicked_button.is_a?(Integer)			
 			session[:batch_number] = clicked_button - 1
-		else
-			session[:batch_number]
-		end					
+		
+			
+		end		
+		
+		
 	end
 
 end

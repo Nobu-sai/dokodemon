@@ -16,8 +16,8 @@
 
   <div class="feed-button__container" style="position: fixed; top: 20%; left: 5%; background-color: #333;">
     <div>
-      <% if calculate_batch_number(clicked_button: nil, batch_size: @batch_size) > 0 %>
-      <% debugger %>
+      <% if session[:batch_number] > 0 %>
+      <% put calculate_batch_number(clicked_button: nil, batch_size: @batch_size) %>
         <%= link_to "Previous", 
         { 
           controller: session[:current_controller], 
