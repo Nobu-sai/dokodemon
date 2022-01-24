@@ -49,6 +49,9 @@ class BlogPostsFeedQuery < ApplicationQuery
 		blog_posts_batches.each do | batch |
 			@blog_posts_batches << batch
 		end
+
+		puts "## app/queries/blog_posts_feed_query.rb"
+		puts "batch_number #{batch_number}"
 		return @blog_posts_batches[batch_number]
 	end
     end
