@@ -2,6 +2,7 @@
 module SessionTrackBatchNumberService
 
     def track_batch_number(batch_number) 
+	puts "batch_number #{batch_number}"
 
 	
 	if !session[:batch_number]
