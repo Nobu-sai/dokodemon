@@ -23,6 +23,11 @@ module SessionTrackBatchNumberService
 	elsif session[:batch_number] > 0  
 		# Conditional for
 		# - When the user clicked the Feed Button 		
+		# - When this is Called MULTIPLE times with EMPTY param[:page] 
+			# => In the FIRST Call, it Execute the TRUTHY Case and sets session[:batch_number] as 0 
+			# => Thus, in the Second Call, it Executes FALSY Case and sets session[:batch_number] as -1 	
+			# Case
+				# - test/queries/blog_posts_feed_query_test.rb		
 		return session[:batch_number] = (batch_number.to_i - 1)
 	end
 	
