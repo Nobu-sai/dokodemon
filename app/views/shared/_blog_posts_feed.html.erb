@@ -3,11 +3,10 @@
     # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
 	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
 
-<% if @blog_posts_feed.count > 0 %>
-  <% puts "### app/views/shared/_blog_posts_feed.html.erb" %>   
-  <% puts "@blog_posts_feed.count #{@blog_posts_feed.count}" %>   
+<% if @blog_posts_batch.count > 0 %>
+ 
   
-  <% @blog_posts_feed.each do | post | %>
+  <% @blog_posts_batch.each do | post | %>
        
     <ol class="blogs">      
       <%= render post %>

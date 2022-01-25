@@ -5,17 +5,9 @@ class StaticPagesController < ApplicationController
   def home    
     
     @batch_size = 100
-    puts "## app/controllers/static_pages_controller.rb"
-    # batch_number = track_batch_number(params[:batch_number])
-    puts "params[:batch_number] #{params[:batch_number]}"
-    puts "session[:batch_number] #{session[:batch_number]}"
-    @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: @batch_size, batch_number: track_batch_number(params[:page]))
-    
-    puts "## app/controllers/static_pages_controller.rb"
-    puts "session[:batch_number] #{session[:batch_number]}"
-    puts "@blog_posts_feed #{@blog_posts_feed}"
-    puts "@blog_posts_feed.count #{@blog_posts_feed.count}"
 
+    @blog_posts_batch = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: @batch_size, batch_number: track_batch_number(params[:page]))
+ 
     if logged_in?
       @blog  = current_user.blogs.build      
     end
