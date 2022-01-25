@@ -36,10 +36,8 @@ module CalculateBatchNumberHelper
 		elsif clicked_button.is_a?(Integer)			
 			batch_number = clicked_button - 1
 					
-		end	
-		
-		
-		
+		end			
+				
 		
 	end
 
