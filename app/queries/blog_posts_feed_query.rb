@@ -52,6 +52,7 @@ class BlogPostsFeedQuery < ApplicationQuery
 
 		puts "## app/queries/blog_posts_feed_query.rb"
 		puts "batch_number #{batch_number}"
+		puts "@blog_posts_batches[batch_number] == @blog_posts_batches[batch_number -1] #{@blog_posts_batches[batch_number] == @blog_posts_batches[batch_number -1]}"
 		return @blog_posts_batches[batch_number]
 	end
     end

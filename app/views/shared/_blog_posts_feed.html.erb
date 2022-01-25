@@ -5,6 +5,7 @@
 
 <% if @blog_posts_feed.count > 0 %>
   <% puts "### app/views/shared/_blog_posts_feed.html.erb" %>   
+  <% puts "@blog_posts_feed.count #{@blog_posts_feed.count}" %>   
   
   <% @blog_posts_feed.each do | post | %>
        
@@ -23,7 +24,7 @@
         { 
           controller: session[:current_controller], 
           action: session[:current_action], 
-          batch_number: calculate_batch_number(clicked_button: "previous", batch_size: @batch_size)
+          page: (calculate_batch_number(clicked_button: "previous", batch_size: @batch_size)) + 1
         }, class: "feed-button" %>    
       <% end %>
     </div>
@@ -34,7 +35,7 @@
         { 
           controller: session[:current_controller], 
           action: session[:current_action], 
-          batch_number: calculate_batch_number(clicked_button: i + 1, batch_size: @batch_size)
+          page: (calculate_batch_number(clicked_button: i + 1, batch_size: @batch_size)) + 1
         }, class: "feed-button" %>    
       <% end %>
     </div>
@@ -46,7 +47,7 @@
         { 
           controller: session[:current_controller], 
           action: session[:current_action], 
-          batch_number: calculate_batch_number(clicked_button: "next", batch_size: @batch_size)
+          page: (calculate_batch_number(clicked_button: "next", batch_size: @batch_size)) + 1
         }, class: "feed-button" %>  
       <% end %>
     </div>
