@@ -91,6 +91,7 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
     # POST/Inalid
     test "POST Request (Ajax) to the create Action & Invalid" do     
 
+      puts "## POST Request (Ajax) to the create Action & Invalid"
       log_in_as(@user)
       get root_path
         # => Sets the current Controller Action for will_paginate Pagination Link href
@@ -143,13 +144,17 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
 
   # POST/Inalid/Redirect
     test "User NOT logged in & Try to create a Blog Post" do
+      puts "## User NOT logged in & Try to create a Blog Post"
+
       assert_no_difference 'Blog.count' do
         post blogs_path, params: { blog: { title: "Lorem ipsum", text: "#{'f' * 500}'" } }
       end
       assert_redirected_to login_url
     end
 
-    test "User NOT logged in & Try to delete a Blog Pos" do
+    test "User NOT logged in & Try to delete a Blog Poss" do
+      puts "## User NOT logged in & Try to delete  a Blog Post"
+
       assert_no_difference 'Blog.count' do
         delete blog_path(@blog)
       end
@@ -157,6 +162,8 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
     end
       
     test "User LOGGED in & Try to delete WRONG Blog Post => Should Redirect" do
+      puts "## User LOGGED in & Try to delete WRONG Blog Post => Should Redirect"
+
       log_in_as(users(:michael))
       blog = blogs(:ants)
       assert_no_difference 'Blog.count' do
