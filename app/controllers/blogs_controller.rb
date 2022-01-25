@@ -22,8 +22,8 @@ class BlogsController < ApplicationController
           # - String Path can NOT be used
       else      
 
-        batch_size = 100        
-        @blog_posts_feed = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: batch_size, batch_number: nil)
+        @batch_size = 100        
+        @blog_posts_batch = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: @batch_size, batch_number: track_batch_number(params[:page]))
           # - Feed is retuired 
             # P
               # - On failed submission        
