@@ -1,10 +1,12 @@
-# Instruction
-  # @blog_posts_feed
-    # - user.rb/feed Method/Rails Active Record/where Method's returning Variable.
-	    # - When Rails/ActiveRecord/where Method Fetches data from the Database, it makes an Array of FETCHED Data which can be accessed in the View.
+## Instruction
+# When the user clicked a Feed Button
+# - Send page URL Param as (Actual Batch Nmuber + 1)
+	# P
+	# - Looks better (consistent to the Page Number) in URL Param to Pass 
 
 <% if @blog_posts_batch.count > 0 %>
- 
+ <% puts @blog_posts_batch.class %>
+<% puts "session[:batch_number] #{session[:batch_number]}" %>
   
   <% @blog_posts_batch.each do | post | %>
        
