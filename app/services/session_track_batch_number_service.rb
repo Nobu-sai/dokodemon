@@ -20,7 +20,7 @@ module SessionTrackBatchNumberService
 			# => The user has no chance to click the Feed Button
 			# =>> params[:page] is Nil
 		return session[:batch_number] = 0  
-	elsif session[:batch_number].is_a?(Integer)
+	elsif session[:batch_number] > 0  
 		# Conditional for
 		# - When the user clicked the Feed Button 		
 		# - When this is Called MULTIPLE times with EMPTY param[:page] 
