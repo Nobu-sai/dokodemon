@@ -25,8 +25,8 @@
       <% if session[:batch_number] > 0 %>
         <%= link_to "Previous", 
         { 
-          controller: session[:current_controller], 
-          action: session[:current_action], 
+          controller: session[:responded_controller], 
+          action: session[:responded_action], 
           page: (calculate_batch_number(clicked_button: "previous", batch_size: @batch_size)) + 1
         }, class: "feed-button" %>    
       <% end %>
@@ -36,8 +36,8 @@
       <% for i in 0..calculate_total_batches(@batch_size) -1 do %>                        
         <%= link_to i + 1, 
         { 
-          controller: session[:current_controller], 
-          action: session[:current_action], 
+          controller: session[:responded_controller], 
+          action: session[:responded_action], 
           page: (calculate_batch_number(clicked_button: i + 1, batch_size: @batch_size)) + 1
         }, class: "feed-button" %>    
       <% end %>
@@ -48,8 +48,8 @@
       <% if session[:batch_number] < calculate_total_batches(@batch_size) -1 %>        
         <%= link_to "Next", 
         { 
-          controller: session[:current_controller], 
-          action: session[:current_action], 
+          controller: session[:responded_controller], 
+          action: session[:responded_action], 
           page: (calculate_batch_number(clicked_button: "next", batch_size: @batch_size)) + 1
         }, class: "feed-button" %>  
       <% end %>

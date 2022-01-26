@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SessionsTrackPagePathPolicyTest < ActionDispatch::IntegrationTest  
+class SessionsStorePathServiceTest < ActionDispatch::IntegrationTest  
 	test "Send GET Request (whatever Controller Action)" do
  		# Test about
 		#  - Instance Variables should be accessible"

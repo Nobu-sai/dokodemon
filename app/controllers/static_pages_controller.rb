@@ -1,6 +1,8 @@
 
 class StaticPagesController < ApplicationController
   include SessionTrackBatchNumberService  
+  
+  before_action :session_store_path
 
   def home    
    

@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated?
-        forwarding_url = session[:forwarding_url]
+        previous_url = session[:responded_controller_action]
         reset_session
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         log_in user
-        redirect_to forwarding_url || user
+        redirect_to previous_url || user
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."

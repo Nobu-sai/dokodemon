@@ -18,7 +18,7 @@ class BlogsController < ApplicationController
 
         flash[:success] = "The new blog post was created!"           
 
-        format.html { redirect_to controller: session[:current_controller], action: session[:current_action] }           
+        format.html { redirect_to controller: session[:responded_controller], action: session[:responded_action] }           
           # - String Path can NOT be used
       else      
 
@@ -27,7 +27,7 @@ class BlogsController < ApplicationController
           # - Feed is retuired 
             # P
               # - On failed submission        
-        format.html { render "#{session[:string_path]}", status: 400 }       
+        format.html { render "#{session[:responded_controller_action]}", status: 400 }       
  
       end
         

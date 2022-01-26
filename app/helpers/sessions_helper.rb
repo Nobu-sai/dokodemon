@@ -63,15 +63,6 @@ module SessionsHelper
 
   # Stores the URL trying to be accessed.
   def store_location
-    # What it does
-		# - Store the PREVIOUS URL where the user came FROM
-		# Usage
-		# - In a Controller Action
-		# 	- Respond a View File matching to the PREVIOUS URL where the user CAME FROM 
-		# Case
-		# - In app/controllers/sessions_controller.rb
-		# 	- User Activated the Account -> Link the user Forward to where the one WAS or CAME FROM 
-    session[:forwarding_url] = request.original_url if request.get?
   end
 
 end
