@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include SessionTrackPagePathPolicy
-  include UserShouldLoggedInPolicy
+  include UserShouldLogInPolicy
   
   before_action :track_page_path
     # For

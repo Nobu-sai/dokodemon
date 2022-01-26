@@ -1,7 +1,7 @@
 
 
-module UserShouldLoggedInPolicy
-    def logged_in_user
+module UserShouldLogInPolicy
+    def user_should_log_in
       unless logged_in?
         store_location
         # For
