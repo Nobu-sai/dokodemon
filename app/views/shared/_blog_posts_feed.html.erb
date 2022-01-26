@@ -2,10 +2,6 @@
 
 <% if @blog_posts_batch.count > 0 %>
 
- <% puts "## app/views/shared/_blog_posts_feed.html.erb" %>
- <% puts @blog_posts_batch.class %>
-<% puts "session[:batch_number] #{session[:batch_number]}" %>
-  
   <% @blog_posts_batch.each do | post | %>
        
     <ol class="blogs">      
@@ -21,7 +17,6 @@
     # P
     # - Looks better (consistent to the Page Number) in URL Param to Pass 
  
-    <% puts "session[:batch_number] #{session[:batch_number]}" %>
       <% if session[:batch_number] > 0 %>
         <%= link_to "Previous", 
         { 
@@ -44,7 +39,6 @@
     </div>
 
     <div>
-    <% puts "session[:batch_number] #{session[:batch_number]}" %>
       <% if session[:batch_number] < calculate_total_batches(@batch_size) -1 %>        
         <%= link_to "Next", 
         { 

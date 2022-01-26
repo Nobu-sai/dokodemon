@@ -5,8 +5,7 @@ class StaticPagesController < ApplicationController
   before_action :session_store_path
 
   def home    
-   
-    puts "## app/controllers/static_pages_controller.rb"
+
     @batch_size = 100
     @blog_posts_batch = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: @batch_size, batch_number: track_batch_number(params[:page]))
  
