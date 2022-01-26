@@ -5,6 +5,7 @@ require 'test_helper'
 
 class SharedBlogPostsFeedTest < ActionDispatch::IntegrationTest
 include UrlEncodingHelper 
+include CalculateTotalBatchesService
 
 
   def setup
@@ -33,7 +34,8 @@ include UrlEncodingHelper
 
       # Each Feed Button
         # First page 
-          total_batches = @controller.instance_variable_get(:@total_batches)
+          batch_size = controller.instance_variable_get(:@batch_size)
+          total_batches = calculate_total_batches(batch_size)
           assert total_batches.class == Integer 
           @feed_button_amount =  total_batches + 1
             # One for each batch + Next
