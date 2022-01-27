@@ -7,23 +7,11 @@ class StaticPagesController < ApplicationController
   def home    
 
     @batch_size = 100
-    puts "##"
-    puts "##"
-    puts "##"
-    puts "##"
-    puts "##"
-    puts "##"
-    puts "##"
-    puts "## StaticPagesController/home"
-    puts "session[:batch_number] #{session[:batch_number]}"
-    # puts "session[:batch_number] > 0 #{session[:batch_number] > 0 }"
-    puts "batch_number = track_batch_number(params[:page]) == nil #{batch_number = track_batch_number(params[:page]) }"
+    # puts "## StaticPagesController/home"
 
     @blog_posts_batch = BlogPostsFeedQuery.new.fetch_blog_posts_as_a_batch(current_user: current_user, batch_size: @batch_size, batch_number: track_batch_number(params[:page]))
 
-    puts "## StaticPagesController/home/after @blog_posts_batc "
-    puts "session[:batch_number] > 0 #{session[:batch_number] > 0 }"
-    puts "track_batch_number(params[:page]) #{track_batch_number(params[:page])}"
+    # puts "## StaticPagesController/home/after @blog_posts_batc "
  
     if logged_in?
       @blog  = current_user.blogs.build      

@@ -19,9 +19,8 @@ module SessionTrackBatchNumberService
 			# batch_number == nil #=> true
 	
 	if session[:batch_number] == -1 || batch_number == 0	
-		# puts "## track_batch_number/!session[:batch_number] || batch_number == 0"
-		puts "## track_batch_number/session[:batch_number] == nil || batch_number == 0"
-		# !session[:batch_number]
+		# puts "## track_batch_number/session[:batch_number] == -1 || batch_number == 0	
+		# session[:batch_number] == -1
 		# For
 			# - The FIRST time visit to the URL
 				# => The user has no chance to click the Feed Button
@@ -33,16 +32,12 @@ module SessionTrackBatchNumberService
 				# Case
 					# - test/queries/blog_posts_feed_query_test.rb		
 		return session[:batch_number] = 0  
-	# elsif session[:batch_number] > 0 
-	# elsif session[:batch_number].is_a?(Integer) && session[:batch_number] > 0 
-	# elsif !session[:batch_number] == nil || session[:batch_number] > 0 
 	else
-		puts "## track_batch_number/elsif session[:batch_number] > 0"
+		# puts "## track_batch_number/else
 		# Conditional for
-		# - When the user clicked the Feed Button 		
+		# - When the user clicked the Feed Button 				
 		return session[:batch_number] = (batch_number.to_i - 1)
-	# else
-	# 	return
+	
 	end
 
 
