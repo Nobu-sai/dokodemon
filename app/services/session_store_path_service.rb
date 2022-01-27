@@ -18,8 +18,15 @@ module SessionStorePathService
     
           if request.get? 
                 session[:responded_controller] = controller_name
+                # For
+                # - View/link_to 
                 session[:responded_action] = action_name                             
+                # For
+                # - View/link_to 
                 session[:responded_controller_action] = "#{controller_name}/#{action_name}"
+                # For
+                # - Controller/redirect 
+                # - Controller/render 
                 # Ex
                 # - static_pages/home
           end     
